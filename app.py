@@ -67,15 +67,15 @@ my_applio = loadThemes.load_theme() or "ParityError/Interstellar"
 with gr.Blocks(
     theme=my_applio, title="Applio", css="footer{display:none !important}"
 ) as Applio:
-    gr.Markdown("# Applio")
+    gr.Markdown("# Voicy")
     gr.Markdown(
         i18n(
-            "A simple, high-quality voice conversion tool focused on ease of use and performance."
+            "Yüksek Kalitede Ses Klonlama Hizmeti"
         )
     )
     gr.Markdown(
         i18n(
-            "[Support](https://discord.gg/urxFjYmYYh) — [GitHub](https://github.com/IAHispano/Applio)"
+            "[GitHub](https://github.com/ahm3texe/RVC_v2)"
         )
     )
     with gr.Tab(i18n("Inference")):
@@ -86,24 +86,6 @@ with gr.Blocks(
 
     with gr.Tab(i18n("TTS")):
         tts_tab()
-
-    with gr.Tab(i18n("Voice Blender")):
-        voice_blender_tab()
-
-    with gr.Tab(i18n("Plugins")):
-        plugins_tab()
-
-    with gr.Tab(i18n("Download")):
-        download_tab()
-
-    with gr.Tab(i18n("Report a Bug")):
-        report_tab()
-
-    with gr.Tab(i18n("Extra")):
-        extra_tab()
-
-    with gr.Tab(i18n("Settings")):
-        settings_tab()
 
     gr.Markdown(
         """
