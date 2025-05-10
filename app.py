@@ -78,14 +78,17 @@ with gr.Blocks(
             "[GitHub](https://github.com/ahm3texe/RVC_v2)"
         )
     )
-    with gr.Tab(i18n("Inference")):
+    with gr.Tab(i18n("Klonlama Arayüzü")):
         inference_tab()
 
-    with gr.Tab(i18n("Training")):
+    with gr.Tab(i18n("TTS")):
+    tts_tab()
+
+    with gr.Tab(i18n("Eğitim")):
         train_tab()
 
-    with gr.Tab(i18n("TTS")):
-        tts_tab()
+    with gr.Tab(i18n("Model İndirme")):
+        download_tab()
 
     gr.Markdown(
         """
