@@ -929,7 +929,6 @@ def inference_tab():
                     visible=False,
                     value=128,
                     interactive=True,
-                    visible=False,
                 )
                 f0_method = gr.Radio(
                     label=i18n("Pitch extraction algorithm"),
@@ -945,7 +944,6 @@ def inference_tab():
                     ],
                     value="rmvpe",
                     interactive=True,
-                    visible=False,
                 )
                 embedder_model = gr.Radio(
                     label=i18n("Embedder Model"),
@@ -959,7 +957,6 @@ def inference_tab():
                     ],
                     value="contentvec",
                     interactive=True,
-                    visible=False,
                 )
                 with gr.Column(visible=False) as embedder_custom:
                     with gr.Accordion(i18n("Custom Embedder"), open=True):
