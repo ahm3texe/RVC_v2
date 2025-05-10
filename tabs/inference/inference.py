@@ -354,8 +354,8 @@ def inference_tab():
     with gr.Column():
         with gr.Row():
             model_file = gr.Dropdown(
-                label=i18n("Voice Model"),
-                info=i18n("Select the voice model to use for the conversion."),
+                label=i18n("Ses Modeli"),
+                info=i18n("Klonlamak istediğiniz ses modelini seçiniz."),
                 choices=sorted(names, key=lambda x: extract_model_and_epoch(x)),
                 interactive=True,
                 value=default_weight,
@@ -363,8 +363,8 @@ def inference_tab():
             )
 
             index_file = gr.Dropdown(
-                label=i18n("Index File"),
-                info=i18n("Select the index file to use for the conversion."),
+                label=i18n("Index Dosyası"),
+                info=i18n("Model dosyanızın indexini seçiniz."),
                 choices=get_indexes(),
                 value=match_index(default_weight) if default_weight else "",
                 interactive=True,
@@ -372,7 +372,7 @@ def inference_tab():
             )
         with gr.Row():
             unload_button = gr.Button(i18n("Unload Voice"))
-            refresh_button = gr.Button(i18n("Refresh"))
+            refresh_button = gr.Button(i18n("Yenile"))
 
             unload_button.click(
                 fn=lambda: (
@@ -396,22 +396,22 @@ def inference_tab():
             )
             with gr.Row():
                 audio = gr.Dropdown(
-                    label=i18n("Select Audio"),
-                    info=i18n("Select the audio to convert."),
+                    label=i18n("Ses Dosyanızı Seçiniz"),
+                    info=i18n("Dönüştürmek istediğiniz sesi seçiniz."),
                     choices=sorted(audio_paths),
                     value=audio_paths[0] if audio_paths else "",
                     interactive=True,
                     allow_custom_value=True,
                 )
 
-        with gr.Accordion(i18n("Advanced Settings"), open=False):
+        with gr.Accordion(i18n("Ekstra Ayarlar"), open=False):
             with gr.Column():
                 clear_outputs_infer = gr.Button(
                     i18n("Clear Outputs (Deletes all audios in assets/audios)")
                 )
                 output_path = gr.Textbox(
-                    label=i18n("Output Path"),
-                    placeholder=i18n("Enter output path"),
+                    label=i18n("Çıktı Yolu"),
+                    placeholder=i18n("Ses dosyasının çıktı yolunu belirleyin."),
                     info=i18n(
                         "The path where the output audio will be saved, by default in assets/audios/output.wav"
                     ),
@@ -423,8 +423,8 @@ def inference_tab():
                     interactive=True,
                 )
                 export_format = gr.Radio(
-                    label=i18n("Export Format"),
-                    info=i18n("Select the format to export the audio."),
+                    label=i18n("Çıkış Formatı"),
+                    info=i18n("Ses dosyanızın uzantısını seçiniz."),
                     choices=["WAV", "MP3", "FLAC", "OGG", "M4A"],
                     value="WAV",
                     interactive=True,
@@ -437,9 +437,9 @@ def inference_tab():
                     interactive=True,
                 )
                 split_audio = gr.Checkbox(
-                    label=i18n("Split Audio"),
+                    label=i18n("Sesi Parçala"),
                     info=i18n(
-                        "Split the audio into chunks for inference to obtain better results in some cases."
+                        "Ses dosyasını belirli parçalar halinde işlem uygular (Bazı durumlarda daha iyi sonuçlar verir.)"
                     ),
                     visible=True,
                     value=False,
@@ -448,7 +448,7 @@ def inference_tab():
                 autotune = gr.Checkbox(
                     label=i18n("Autotune"),
                     info=i18n(
-                        "Apply a soft autotune to your inferences, recommended for singing conversions."
+                        "Sese autotune uygular. (Şarkı için kullanılması tavsiye edilir.)"
                     ),
                     visible=True,
                     value=False,
@@ -457,18 +457,18 @@ def inference_tab():
                 autotune_strength = gr.Slider(
                     minimum=0,
                     maximum=1,
-                    label=i18n("Autotune Strength"),
+                    label=i18n("Autotune Gücü"),
                     info=i18n(
-                        "Set the autotune strength - the more you increase it the more it will snap to the chromatic grid."
+                        "Otomatik ayar gücünü ayarlayın; ne kadar çok artırırsanız. O kadar çok efekt uygulanacakatır."
                     ),
                     visible=False,
                     value=1,
                     interactive=True,
                 )
                 clean_audio = gr.Checkbox(
-                    label=i18n("Clean Audio"),
+                    label=i18n("Sesi Temizleyin"),
                     info=i18n(
-                        "Clean your audio output using noise detection algorithms, recommended for speaking audios."
+                        "Sesi gürültüden arındırır."
                     ),
                     visible=True,
                     value=False,
@@ -477,9 +477,9 @@ def inference_tab():
                 clean_strength = gr.Slider(
                     minimum=0,
                     maximum=1,
-                    label=i18n("Clean Strength"),
+                    label=i18n("Ses Temizle Gücü"),
                     info=i18n(
-                        "Set the clean-up level to the audio you want, the more you increase it the more it will clean up, but it is possible that the audio will be more compressed."
+                        "Temizleme seviyesini istediğiniz ses seviyesine ayarlayın, seviyeyi ne kadar artırırsanız o kadar fazla temizlenir, ancak sesin kalitesi düşebilir."
                     ),
                     visible=False,
                     value=0.5,
