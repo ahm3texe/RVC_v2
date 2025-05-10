@@ -392,7 +392,7 @@ def inference_tab():
     with gr.Tab(i18n("Single")):
         with gr.Column():
             upload_audio = gr.Audio(
-                label=i18n("Upload Audio"), type="filepath", editable=False
+                label=i18n("Ses Dosyanızı Yükleyin"), type="filepath", editable=False
             )
             with gr.Row():
                 audio = gr.Dropdown(
@@ -488,7 +488,7 @@ def inference_tab():
                 formant_shifting = gr.Checkbox(
                     label=i18n("Formant Shifting"),
                     info=i18n(
-                        "Enable formant shifting. Used for male to female and vice-versa convertions."
+                        "Formant shifting etkinleştir. Erkekten kadına ve tam tersi dönüşümlerde kullanılır."
                     ),
                     value=False,
                     visible=True,
@@ -496,7 +496,7 @@ def inference_tab():
                 )
                 post_process = gr.Checkbox(
                     label=i18n("Post-Process"),
-                    info=i18n("Post-process the audio to apply effects to the output."),
+                    info=i18n("Post-process Efekti Uygular."),
                     value=False,
                     interactive=True,
                 )
@@ -861,9 +861,9 @@ def inference_tab():
                     minimum=-24,
                     maximum=24,
                     step=1,
-                    label=i18n("Pitch"),
+                    label=i18n("Perde Ayarı"),
                     info=i18n(
-                        "Set the pitch of the audio, the higher the value, the higher the pitch."
+                        "Sesin perdesini ayarlayın, değer ne kadar yüksek olursa, perde de o kadar yüksek olur."
                     ),
                     value=0,
                     interactive=True,
