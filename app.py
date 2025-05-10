@@ -70,7 +70,7 @@ with gr.Blocks(
     gr.Markdown("# Voicy")
     gr.Markdown(
         i18n(
-            "Yüksek Kalitede Ses Klonlama Hizmeti"
+            "İstanbul Sabahattin Zaim Üniversitesi  \nYüksek Kalitede Ses Klonlama Hizmeti"
         )
     )
     gr.Markdown(
