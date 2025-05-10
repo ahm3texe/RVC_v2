@@ -93,7 +93,6 @@ with gr.Blocks(
     gr.Markdown(
         """
     <div style="text-align: center; font-size: 0.9em; text-color: a3a3a3;">
-    By using Applio, you agree to comply with ethical and legal standards, respect intellectual property and privacy rights, avoid harmful or prohibited uses, and accept full responsibility for any outcomes, while Applio disclaims liability and reserves the right to amend these terms.
     </div>
     """
     )
