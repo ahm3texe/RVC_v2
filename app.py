@@ -82,7 +82,7 @@ with gr.Blocks(
         inference_tab()
 
     with gr.Tab(i18n("TTS")):
-    tts_tab()
+        tts_tab()
 
     with gr.Tab(i18n("Eğitim")):
         train_tab()
