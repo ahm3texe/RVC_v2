@@ -973,6 +973,22 @@ def inference_tab():
                             i18n("Move files to custom embedder folder")
                         )
 
+        def enforce_terms(terms_accepted, *args):
+            if not terms_accepted:
+                message = "You must agree to the Terms of Use to proceed."
+                gr.Info(message)
+                return message, None
+            return run_infer_script(*args)
+
+        terms_checkbox = gr.Checkbox(
+            label=i18n("I agree to the terms of use"),
+            info=i18n(
+                "Please ensure compliance with the terms and conditions detailed in [this document](https://github.com/IAHispano/Applio/blob/main/TERMS_OF_USE.md) before proceeding with your inference."
+            ),
+            value=False,
+            interactive=True,
+        )
+
         convert_button1 = gr.Button(i18n("Convert"))
 
         with gr.Row():
@@ -1210,8 +1226,9 @@ def inference_tab():
         outputs=[embedder_model_custom],
     )
     convert_button1.click(
-        fn=run_infer_script,
+        fn=enforce_terms,
         inputs=[
+            terms_checkbox,
             pitch,
             index_rate,
             rms_mix_rate,
