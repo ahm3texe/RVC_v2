@@ -1090,17 +1090,7 @@ def inference_tab():
             formant_timbre,
         ],
     )
-    formant_shifting_batch.change(
-        fn=toggle_visible_formant_shifting,
-        inputs=[formant_shifting],
-        outputs=[
-            formant_row_batch,
-            formant_preset_batch,
-            formant_refresh_button_batch,
-            formant_qfrency_batch,
-            formant_timbre_batch,
-        ],
-    )
+
     formant_refresh_button.click(
         fn=refresh_formant,
         inputs=[],
@@ -1109,14 +1099,6 @@ def inference_tab():
     formant_preset.change(
         fn=update_sliders_formant,
         inputs=[formant_preset],
-        outputs=[
-            formant_qfrency,
-            formant_timbre,
-        ],
-    )
-    formant_preset_batch.change(
-        fn=update_sliders_formant,
-        inputs=[formant_preset_batch],
         outputs=[
             formant_qfrency,
             formant_timbre,
@@ -1232,20 +1214,10 @@ def inference_tab():
         inputs=[],
         outputs=[],
     )
-    clear_outputs_batch.click(
-        fn=delete_outputs,
-        inputs=[],
-        outputs=[],
-    )
     embedder_model.change(
         fn=toggle_visible_embedder_custom,
         inputs=[embedder_model],
         outputs=[embedder_custom],
-    )
-    embedder_model_batch.change(
-        fn=toggle_visible_embedder_custom,
-        inputs=[embedder_model_batch],
-        outputs=[embedder_custom_batch],
     )
     move_files_button.click(
         fn=create_folder_and_move_files,
@@ -1256,20 +1228,6 @@ def inference_tab():
         fn=lambda: gr.update(choices=refresh_embedders_folders()),
         inputs=[],
         outputs=[embedder_model_custom],
-    )
-    move_files_button_batch.click(
-        fn=create_folder_and_move_files,
-        inputs=[
-            folder_name_input_batch,
-            bin_file_upload_batch,
-            config_file_upload_batch,
-        ],
-        outputs=[],
-    )
-    refresh_embedders_button_batch.click(
-        fn=lambda: gr.update(choices=refresh_embedders_folders()),
-        inputs=[],
-        outputs=[embedder_model_custom_batch],
     )
     convert_button1.click(
         fn=enforce_terms,
@@ -1336,80 +1294,4 @@ def inference_tab():
             sid,
         ],
         outputs=[vc_output1, vc_output2],
-    )
-    convert_button_batch.click(
-        fn=enforce_terms_batch,
-        inputs=[
-            terms_checkbox_batch,
-            pitch_batch,
-            index_rate_batch,
-            rms_mix_rate_batch,
-            protect_batch,
-            hop_length_batch,
-            f0_method_batch,
-            input_folder_batch,
-            output_folder_batch,
-            model_file,
-            index_file,
-            split_audio_batch,
-            autotune_batch,
-            autotune_strength_batch,
-            clean_audio_batch,
-            clean_strength_batch,
-            export_format_batch,
-            f0_file_batch,
-            embedder_model_batch,
-            embedder_model_custom_batch,
-            formant_shifting_batch,
-            formant_qfrency_batch,
-            formant_timbre_batch,
-            post_process_batch,
-            reverb_batch,
-            pitch_shift_batch,
-            limiter_batch,
-            gain_batch,
-            distortion_batch,
-            chorus_batch,
-            bitcrush_batch,
-            clipping_batch,
-            compressor_batch,
-            delay_batch,
-            reverb_room_size_batch,
-            reverb_damping_batch,
-            reverb_wet_gain_batch,
-            reverb_dry_gain_batch,
-            reverb_width_batch,
-            reverb_freeze_mode_batch,
-            pitch_shift_semitones_batch,
-            limiter_threshold_batch,
-            limiter_release_time_batch,
-            gain_db_batch,
-            distortion_gain_batch,
-            chorus_rate_batch,
-            chorus_depth_batch,
-            chorus_center_delay_batch,
-            chorus_feedback_batch,
-            chorus_mix_batch,
-            bitcrush_bit_depth_batch,
-            clipping_threshold_batch,
-            compressor_threshold_batch,
-            compressor_ratio_batch,
-            compressor_attack_batch,
-            compressor_release_batch,
-            delay_seconds_batch,
-            delay_feedback_batch,
-            delay_mix_batch,
-            sid_batch,
-        ],
-        outputs=[vc_output3],
-    )
-    convert_button_batch.click(
-        fn=enable_stop_convert_button,
-        inputs=[],
-        outputs=[convert_button_batch, stop_button],
-    )
-    stop_button.click(
-        fn=disable_stop_convert_button,
-        inputs=[],
-        outputs=[convert_button_batch, stop_button],
     )
