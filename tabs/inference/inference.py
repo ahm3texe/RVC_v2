@@ -389,7 +389,7 @@ def inference_tab():
         with gr.Accordion(i18n("Ekstra Ayarlar"), open=False):
             with gr.Column():
                 clear_outputs_infer = gr.Button(
-                    i18n("Clear Outputs (Deletes all audios in assets/audios)")
+                    i18n("Çıktıları Temizle (assets/audios içindeki tüm sesleri siler)")
                 )
                 output_path = gr.Textbox(
                     label=i18n("Çıktı Yolu"),
@@ -417,6 +417,7 @@ def inference_tab():
                     choices=get_speakers_id(model_file.value),
                     value=0,
                     interactive=True,
+                    visible=False,
                 )
                 split_audio = gr.Checkbox(
                     label=i18n("Sesi Parçala"),
