@@ -417,6 +417,7 @@ def inference_tab():
                     choices=get_speakers_id(model_file.value),
                     value=0,
                     interactive=True,
+                    visible=False,
                 )
                 split_audio = gr.Checkbox(
                     label=i18n("Sesi Parçala"),
@@ -926,6 +927,7 @@ def inference_tab():
                     ],
                     value="rmvpe",
                     interactive=True,
+                    visible=False,
                 )
                 embedder_model = gr.Radio(
                     label=i18n("Embedder Model"),
@@ -939,6 +941,7 @@ def inference_tab():
                     ],
                     value="contentvec",
                     interactive=True,
+                    visible=False,
                 )
                 with gr.Column(visible=False) as embedder_custom:
                     with gr.Accordion(i18n("Custom Embedder"), open=True):
@@ -969,13 +972,6 @@ def inference_tab():
                         move_files_button = gr.Button(
                             i18n("Move files to custom embedder folder")
                         )
-
-                f0_file = gr.File(
-                    label=i18n(
-                        "The f0 curve represents the variations in the base frequency of a voice over time, showing how pitch rises and falls."
-                    ),
-                    visible=True,
-                )
 
         def enforce_terms(terms_accepted, *args):
             if not terms_accepted:
@@ -1249,7 +1245,6 @@ def inference_tab():
             clean_audio,
             clean_strength,
             export_format,
-            f0_file,
             embedder_model,
             embedder_model_custom,
             formant_shifting,
