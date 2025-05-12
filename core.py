@@ -591,7 +591,7 @@ def run_tensorboard_script():
 # Download
 def run_download_script(model_link: str):
     model_download_pipeline(model_link)
-    return f"Model downloaded successfully."
+    return f"Model başarıyla indirildi."
 
 
 # Prerequisites
