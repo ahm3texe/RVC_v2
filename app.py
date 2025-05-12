@@ -9,18 +9,18 @@ DEFAULT_SERVER_NAME = "127.0.0.1"
 DEFAULT_PORT = 6969
 MAX_PORT_ATTEMPTS = 10
 
-# Set up logging
+# Log ayarları
 logging.getLogger("uvicorn").setLevel(logging.WARNING)
 logging.getLogger("httpx").setLevel(logging.WARNING)
 
-# Add current directory to sys.path
+# Mevcut dizini sys.path'e ekle
 now_dir = os.getcwd()
 sys.path.append(now_dir)
 
 # Zluda hijack
 import rvc.lib.zluda
 
-# Import Tabs
+# Sekme importları
 from tabs.inference.inference import inference_tab
 from tabs.train.train import train_tab
 from tabs.extra.extra import extra_tab
@@ -31,7 +31,7 @@ from tabs.voice_blender.voice_blender import voice_blender_tab
 from tabs.plugins.plugins import plugins_tab
 from tabs.settings.settings import settings_tab
 
-# Run prerequisites
+# Ön gereksinimleri çalıştır
 from core import run_prerequisites_script
 
 run_prerequisites_script(
@@ -40,12 +40,12 @@ run_prerequisites_script(
     exe=True,
 )
 
-# Initialize i18n
+# i18n başlat
 from assets.i18n.i18n import I18nAuto
 
 i18n = I18nAuto()
 
-# Start Discord presence if enabled
+# Discord presence'ı başlat (etkinse)
 from tabs.settings.sections.presence import load_config_presence
 
 if load_config_presence():
@@ -53,34 +53,40 @@ if load_config_presence():
 
     RPCManager.start_presence()
 
-# Check installation
+# Kurulumu kontrol et
 import assets.installation_checker as installation_checker
 
 installation_checker.check_installation()
 
-# Load theme
+# Temayı yükle
 import assets.themes.loadThemes as loadThemes
 
 my_applio = loadThemes.load_theme() or "ParityError/Interstellar"
 
-# Custom CSS to hide full-screen and download buttons
+# Özel CSS: Tam ekran/indirme düğmelerini gizle ve kapsayıcı alanı 100x100 yap
 custom_css = """
 footer {display: none !important;}
 .icon-button-wrapper {display: none !important;}
+button.svelte-dpdy90 {
+    width: 100px !important;
+    height: 100px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
 """
 
-# Define Gradio interface
+# Gradio arayüzünü tanımla
 with gr.Blocks(
     theme=my_applio, title="Voicy", css=custom_css
 ) as Applio:
-    with gr.Row():  # Horizontal row for logo and Markdown
+    with gr.Row():  # Logo ve Markdown için yatay satır
         gr.Image(
             value="assets/1.jpg",
-            width=100,  # Set width to a reasonable size
-            height=100,  # Set height to maintain aspect ratio
+            width=100,  # Logonun boyutu zaten 100x100
+            height=100,
             show_label=False,
             container=False,
-            interactive=False  # Disable interactivity
+            interactive=False  # İnteraktif özellikleri kapat
         )
         gr.Markdown("# Voicy")
     gr.Markdown(
@@ -138,6 +144,9 @@ if __name__ == "__main__":
             break
         except OSError:
             print(
-                f"Failed to launch on port {port}, trying again on port {port - 1}..."
+                f"{port} portunda başlatılamadı, {port - 1} portunda tekrar deneniyor..."
             )
-            portầ
+            port -= 1
+        except Exception as error:
+            print(f"Gradio başlatılırken bir hata oluştu: {error}")
+            break
