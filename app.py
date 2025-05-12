@@ -69,7 +69,7 @@ with gr.Blocks(
 ) as Applio:
     with gr.Row():
         gr.Image(
-            value="assets/favicon.ico",  # Logonun dosya yolu
+            value="assets/1.jpg",  # Logonun dosya yolu
             width=50,
             height=50,
             show_label=False,
