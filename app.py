@@ -85,7 +85,6 @@ with gr.Blocks(
     gr.Markdown(
         i18n("İstanbul Sabahattin Zaim Üniversitesi  \nYüksek Kalitede Ses Klonlama Hizmeti")
     )
-    )
     gr.Markdown(
         i18n(
             "[GitHub](https://github.com/ahm3texe/RVC_v2)"
