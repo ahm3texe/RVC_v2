@@ -324,14 +324,6 @@ def tts_tab():
             return message, None
         return run_tts_script(*args)
 
-    terms_checkbox = gr.Checkbox(
-        label=i18n("I agree to the terms of use"),
-        info=i18n(
-            "Please ensure compliance with the terms and conditions detailed in [this document](https://github.com/IAHispano/Applio/blob/main/TERMS_OF_USE.md) before proceeding with your inference."
-        ),
-        value=False,
-        interactive=True,
-    )
     convert_button = gr.Button(i18n("Convert"))
 
     with gr.Row():
@@ -385,9 +377,8 @@ def tts_tab():
         outputs=[embedder_model_custom],
     )
     convert_button.click(
-        fn=enforce_terms,
+        fn=run_tts_script,
         inputs=[
-            terms_checkbox,
             input_tts_path,
             tts_text,
             tts_voice,
