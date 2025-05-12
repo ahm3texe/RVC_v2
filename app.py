@@ -82,7 +82,7 @@ with gr.Blocks(
     css=css_code + "footer{display:none !important}"
 ) as Applio:
     # Sol üst logo
-    gr.HTML('<img id="app-logo" src="file/assets/1.jpg" />')
+    gr.HTML('<img id="app-logo" src="https://raw.githubusercontent.com/ahm3texe/RVC_v2/main/assets/1.jpg" />')
 
     # Başlık ve açıklamalar
     gr.Markdown("# Voicy")
