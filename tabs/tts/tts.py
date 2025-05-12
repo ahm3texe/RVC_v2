@@ -49,8 +49,8 @@ def tts_tab():
     with gr.Column():
         with gr.Row():
             model_file = gr.Dropdown(
-                label=i18n("Voice Model"),
-                info=i18n("Select the voice model to use for the conversion."),
+                label=i18n("Ses Modeli"),
+                info=i18n("Klonlamak istediğiniz ses modelini seçiniz."),
                 choices=sorted(names, key=lambda x: extract_model_and_epoch(x)),
                 interactive=True,
                 value=default_weight,
@@ -58,8 +58,8 @@ def tts_tab():
             )
             best_default_index_path = match_index(model_file.value)
             index_file = gr.Dropdown(
-                label=i18n("Index File"),
-                info=i18n("Select the index file to use for the conversion."),
+                label=i18n("Index Dosyası"),
+                info=i18n("Model dosyanızın indexini seçiniz."),
                 choices=get_indexes(),
                 value=best_default_index_path,
                 interactive=True,
@@ -67,7 +67,7 @@ def tts_tab():
             )
         with gr.Row():
             unload_button = gr.Button(i18n("Unload Voice"))
-            refresh_button = gr.Button(i18n("Refresh"))
+            refresh_button = gr.Button(i18n("Yenile"))
 
             unload_button.click(
                 fn=lambda: (
@@ -90,8 +90,8 @@ def tts_tab():
         )
     )
     tts_voice = gr.Dropdown(
-        label=i18n("TTS Voices"),
-        info=i18n("Select the TTS voice to use for the conversion."),
+        label=i18n("TTS Sesleri"),
+        info=i18n("Dönüştürme için kullanılacak TTS sesini seçin."),
         choices=short_names,
         interactive=True,
         value=random.choice(short_names),
@@ -101,18 +101,18 @@ def tts_tab():
         minimum=-100,
         maximum=100,
         step=1,
-        label=i18n("TTS Speed"),
-        info=i18n("Increase or decrease TTS speed."),
+        label=i18n("TTS Hızı"),
+        info=i18n("TTS hızını artırın veya azaltın."),
         value=0,
         interactive=True,
     )
 
     with gr.Tabs():
-        with gr.Tab(label="Text to Speech"):
+        with gr.Tab(label="Metinde Konuşmaya"):
             tts_text = gr.Textbox(
-                label=i18n("Text to Synthesize"),
-                info=i18n("Enter the text to synthesize."),
-                placeholder=i18n("Enter text to synthesize"),
+                label=i18n("Sentezlenecek Metin"),
+                info=i18n("Sentezlenmesini İstediğiniz Metni Giriniz."),
+                placeholder=i18n("Sentezlenmesini İstediğiniz Metni Giriniz."),
                 lines=3,
             )
         with gr.Tab(label="File to Speech"):
