@@ -302,12 +302,12 @@ def upload_to_google_drive(pth_path, index_path):
 # Train Tab
 def train_tab():
     # Model settings section
-    with gr.Accordion(i18n("Model Settings")):
+    with gr.Accordion(i18n("Model Ayarları)):
         with gr.Row():
             with gr.Column():
                 model_name = gr.Dropdown(
-                    label=i18n("Model Name"),
-                    info=i18n("Name of the new model."),
+                    label=i18n("Model Adı"),
+                    info=i18n("Yeni modelin adı."),
                     choices=get_models_list(),
                     value="my-project",
                     interactive=True,
@@ -325,8 +325,8 @@ def train_tab():
                 )
             with gr.Column():
                 sampling_rate = gr.Radio(
-                    label=i18n("Sampling Rate"),
-                    info=i18n("The sampling rate of the audio files."),
+                    label=i18n("Sampling Oranı"),
+                    info=i18n("Ses dosyalarının örnekleme oranı."),
                     choices=["32000", "40000", "48000"],
                     value="40000",
                     interactive=True,
@@ -352,59 +352,59 @@ def train_tab():
                         min(cpu_count(), 32),  # max 32 parallel processes
                         min(cpu_count(), 32),
                         step=1,
-                        label=i18n("CPU Cores"),
+                        label=i18n("CPU Çekirdekleri"),
                         info=i18n(
-                            "The number of CPU cores to use in the extraction process. The default setting are your cpu cores, which is recommended for most cases."
+                            "Çıkarım sürecinde kullanılacak CPU çekirdeği sayısı. Varsayılan ayar, çoğu durumda önerilen CPU çekirdeklerinizdir."
                         ),
                         interactive=True,
                     )
 
                 with gr.Column():
                     gpu = gr.Textbox(
-                        label=i18n("GPU Number"),
+                        label=i18n("GPU Numarası"),
                         info=i18n(
-                            "Specify the number of GPUs you wish to utilize for extracting by entering them separated by hyphens (-)."
+                            "Çıkarım işlemi için kullanmak istediğiniz GPU sayısını tire (-) ile ayırarak girin."
                         ),
                         placeholder=i18n("0 to ∞ separated by -"),
                         value=str(get_number_of_gpus()),
                         interactive=True,
                     )
                     gr.Textbox(
-                        label=i18n("GPU Information"),
-                        info=i18n("The GPU information will be displayed here."),
+                        label=i18n("GPU Bilgisi"),
+                        info=i18n("GPU bilgisi burada görüntülenecek."),
                         value=get_gpu_info(),
                         interactive=False,
                     )
     # Preprocess section
-    with gr.Accordion(i18n("Preprocess")):
+    with gr.Accordion(i18n("Ön İşleme")):
         dataset_path = gr.Dropdown(
-            label=i18n("Dataset Path"),
-            info=i18n("Path to the dataset folder."),
-            # placeholder=i18n("Enter dataset path"),
+            label=i18n("Veri Kümesi Yolu"),
+            info=i18n("Veri kümesi klasörünün yolu."),
+            # placeholder=i18n("Veri kümesi yolunu girin"),
             choices=get_datasets_list(),
             allow_custom_value=True,
             interactive=True,
         )
         dataset_creator = gr.Checkbox(
-            label=i18n("Dataset Creator"),
+            label=i18n("Veri kümesi Oluşturucusu"),
             value=False,
             interactive=True,
             visible=True,
         )
         with gr.Column(visible=False) as dataset_creator_settings:
-            with gr.Accordion(i18n("Dataset Creator")):
+            with gr.Accordion(i18n("Veri kümesi Oluşturucusu")):
                 dataset_name = gr.Textbox(
-                    label=i18n("Dataset Name"),
-                    info=i18n("Name of the new dataset."),
-                    placeholder=i18n("Enter dataset name"),
+                    label=i18n("Veri Seti Adı"),
+                    info=i18n("Yeni veri kümesinin adı."),
+                    placeholder=i18n("Veri kümesi adını girin."),
                     interactive=True,
                 )
                 upload_audio_dataset = gr.File(
-                    label=i18n("Upload Audio Dataset"),
+                    label=i18n("Ses Veri Setini Yükleyin."),
                     type="filepath",
                     interactive=True,
                 )
-        refresh = gr.Button(i18n("Refresh"))
+        refresh = gr.Button(i18n("Yenile"))
 
         with gr.Accordion(i18n("Advanced Settings"), open=False):
             cut_preprocess = gr.Radio(
