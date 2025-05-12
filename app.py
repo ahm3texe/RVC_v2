@@ -64,30 +64,14 @@ import assets.themes.loadThemes as loadThemes
 my_applio = loadThemes.load_theme() or "ParityError/Interstellar"
 
 # Define Gradio interface
-css_code = """
-#app-logo {
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 9999;
-    height: 45px;
-    width: auto;
-    border-radius: 6px;
-}
-"""
-
 with gr.Blocks(
-    theme=my_applio,
-    title="Voicy",
-    css=css_code + "footer{display:none !important}"
+    theme=my_applio, title="Voicy", css="footer{display:none !important}"
 ) as Applio:
-    # Sol üst köşeye sabit logo
-    gr.HTML('<img id="app-logo" src="file/assets/1.jpg" />')
-
-    # Başlık ve açıklamalar (orta hizalı)
-    gr.Markdown("## Voicy")
+    gr.Markdown("# Voicy")
     gr.Markdown(
-        i18n("İstanbul Sabahattin Zaim Üniversitesi  \nYüksek Kalitede Ses Klonlama Hizmeti")
+        i18n(
+            "İstanbul Sabahattin Zaim Üniversitesi  \nYüksek Kalitede Ses Klonlama Hizmeti"
+        )
     )
     gr.Markdown(
         i18n(
