@@ -302,7 +302,7 @@ def upload_to_google_drive(pth_path, index_path):
 # Train Tab
 def train_tab():
     # Model settings section
-    with gr.Accordion(i18n("Model Ayarları)):
+    with gr.Accordion(i18n("Model Ayarları")):
         with gr.Row():
             with gr.Column():
                 model_name = gr.Dropdown(
