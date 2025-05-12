@@ -476,12 +476,14 @@ def inference_tab():
                     value=False,
                     visible=True,
                     interactive=True,
+                    visible=False,
                 )
                 post_process = gr.Checkbox(
                     label=i18n("Post-Process"),
                     info=i18n("Post-process Efekti Uygular."),
                     value=False,
                     interactive=True,
+                    visible=False,
                 )
                 with gr.Row(visible=False) as formant_row:
                     formant_preset = gr.Dropdown(
@@ -860,6 +862,7 @@ def inference_tab():
                     ),
                     value=0.75,
                     interactive=True,
+                    visible=False,
                 )
                 rms_mix_rate = gr.Slider(
                     minimum=0,
@@ -870,6 +873,7 @@ def inference_tab():
                     ),
                     value=1,
                     interactive=True,
+                    visible=False,
                 )
                 protect = gr.Slider(
                     minimum=0,
