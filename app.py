@@ -63,6 +63,12 @@ import assets.themes.loadThemes as loadThemes
 
 my_applio = loadThemes.load_theme() or "ParityError/Interstellar"
 
+# Custom CSS to hide full-screen and download buttons
+custom_css = """
+footer {display: none !important;}
+.icon-button-wrapper {display: none !important;}
+"""
+
 # Define Gradio interface
 with gr.Blocks(
     theme=my_applio, title="Voicy", css=custom_css
@@ -106,7 +112,6 @@ with gr.Blocks(
     """
     )
 
-
 def launch_gradio(server_name: str, server_port: int) -> None:
     Applio.launch(
         favicon_path="assets/favicon.ico",
@@ -116,14 +121,12 @@ def launch_gradio(server_name: str, server_port: int) -> None:
         server_port=server_port,
     )
 
-
 def get_value_from_args(key: str, default: Any = None) -> Any:
     if key in sys.argv:
         index = sys.argv.index(key) + 1
         if index < len(sys.argv):
             return sys.argv[index]
     return default
-
 
 if __name__ == "__main__":
     port = int(get_value_from_args("--port", DEFAULT_PORT))
@@ -137,7 +140,4 @@ if __name__ == "__main__":
             print(
                 f"Failed to launch on port {port}, trying again on port {port - 1}..."
             )
-            port -= 1
-        except Exception as error:
-            print(f"An error occurred launching Gradio: {error}")
-            break
+            portầ
