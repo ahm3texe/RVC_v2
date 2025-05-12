@@ -166,62 +166,22 @@ def update_sample_rate_dropdown(model):
 
 def download_tab():
     with gr.Column():
-        gr.Markdown(value=i18n("## Download Model"))
+        gr.Markdown(value=i18n("## Model İndirme"))
         model_link = gr.Textbox(
-            label=i18n("Model Link"),
-            placeholder=i18n("Introduce the model link"),
+            label=i18n("Model Linki"),
+            placeholder=i18n("Model bağlantısını giriniz."),
             interactive=True,
         )
         model_download_output_info = gr.Textbox(
-            label=i18n("Output Information"),
-            info=i18n("The output information will be displayed here."),
+            label=i18n("Çıktı Bilgisi"),
+            info=i18n("Çıktı bilgisi burada gösterilecektir."),
             value="",
             max_lines=8,
             interactive=False,
         )
-        model_download_button = gr.Button(i18n("Download Model"))
+        model_download_button = gr.Button(i18n("Modeli İndirin"))
         model_download_button.click(
             fn=run_download_script,
             inputs=[model_link],
             outputs=[model_download_output_info],
-        )
-        gr.Markdown(value=i18n("## Drop files"))
-        dropbox = gr.File(
-            label=i18n(
-                "Drag your .pth file and .index file into this space. Drag one and then the other."
-            ),
-            type="filepath",
-        )
-
-        dropbox.upload(
-            fn=save_drop_model,
-            inputs=[dropbox],
-            outputs=[dropbox],
-        )
-        gr.Markdown(value=i18n("## Download Pretrained Models"))
-        pretrained_model = gr.Dropdown(
-            label=i18n("Pretrained"),
-            info=i18n("Select the pretrained model you want to download."),
-            choices=get_pretrained_list(),
-            value="Titan",
-            interactive=True,
-        )
-        pretrained_sample_rate = gr.Dropdown(
-            label=i18n("Sampling Rate"),
-            info=i18n("And select the sampling rate."),
-            choices=get_pretrained_sample_rates(pretrained_model.value),
-            value="40k",
-            interactive=True,
-            allow_custom_value=True,
-        )
-        pretrained_model.change(
-            update_sample_rate_dropdown,
-            inputs=[pretrained_model],
-            outputs=[pretrained_sample_rate],
-        )
-        download_pretrained = gr.Button(i18n("Download"))
-        download_pretrained.click(
-            fn=download_pretrained_model,
-            inputs=[pretrained_model, pretrained_sample_rate],
-            outputs=[],
         )
