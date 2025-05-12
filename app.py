@@ -73,20 +73,29 @@ button.svelte-dpdy90 {
     padding: 0 !important;
     margin: 0 !important;
 }
+.image-container.svelte-dpdy90, .image-frame.svelte-dpdy90 {
+    width: 100px !important;
+    height: 100px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.row.svelte-1jx2rq3 {
+    gap: 0 !important;
+}
 """
 
 # Gradio arayüzünü tanımla
 with gr.Blocks(
     theme=my_applio, title="Voicy", css=custom_css
 ) as Applio:
-    with gr.Row():  # Logo ve Markdown için yatay satır
+    with gr.Row(align="center"):  # Logo ve Markdown'ı ortalayarak yan yana hizala
         gr.Image(
             value="assets/1.jpg",
-            width=100,  # Logonun boyutu zaten 100x100
+            width=100,
             height=100,
             show_label=False,
             container=False,
-            interactive=False  # İnteraktif özellikleri kapat
+            interactive=False
         )
         gr.Markdown("# Voicy")
     gr.Markdown(
