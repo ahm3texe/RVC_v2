@@ -66,13 +66,10 @@ my_applio = loadThemes.load_theme() or "ParityError/Interstellar"
 # Define Gradio interface
 css_code = """
 #app-logo {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index: 9999;
     height: 40px;
     width: auto;
     border-radius: 6px;
+    margin-right: 10px;
 }
 """
 
@@ -81,11 +78,16 @@ with gr.Blocks(
     title="Voicy",
     css=css_code + "footer{display:none !important}"
 ) as Applio:
-    # Sol üst logo
-    gr.HTML('<img id="app-logo" src="https://raw.githubusercontent.com/ahm3texe/RVC_v2/main/assets/1.jpg" />')
 
-    # Başlık ve açıklamalar
-    gr.Markdown("# Voicy")
+    with gr.Row():
+        gr.Image(
+            value="assets/1.jpg",
+            elem_id="app-logo",
+            show_label=False,
+            container=False,
+        )
+        gr.Markdown("## Voicy")
+
     gr.Markdown(
         i18n("İstanbul Sabahattin Zaim Üniversitesi  \nYüksek Kalitede Ses Klonlama Hizmeti")
     )
