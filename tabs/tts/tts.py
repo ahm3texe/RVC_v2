@@ -122,20 +122,20 @@ def tts_tab():
     with gr.Accordion(i18n("Advanced Settings"), open=False):
         with gr.Column():
             output_tts_path = gr.Textbox(
-                label=i18n("Output Path for TTS Audio"),
-                placeholder=i18n("Enter output path"),
+                label=i18n("TTS Sesi için Çıktı Yolu"),
+                placeholder=i18n("Çıktı yolu giriniz"),
                 value=os.path.join(now_dir, "assets", "audios", "tts_output.wav"),
                 interactive=True,
             )
             output_rvc_path = gr.Textbox(
-                label=i18n("Output Path for RVC Audio"),
-                placeholder=i18n("Enter output path"),
+                label=i18n("RVC Sesi için Çıktı Yolu"),
+                placeholder=i18n("Çıktı yolu giriniz"),
                 value=os.path.join(now_dir, "assets", "audios", "tts_rvc_output.wav"),
                 interactive=True,
             )
             export_format = gr.Radio(
-                label=i18n("Export Format"),
-                info=i18n("Select the format to export the audio."),
+                label=i18n("Çıkış Formatı"),
+                info=i18n("Ses dosyanızın uzantısını seçiniz."),
                 choices=["WAV", "MP3", "FLAC", "OGG", "M4A"],
                 value="WAV",
                 interactive=True,
@@ -146,11 +146,12 @@ def tts_tab():
                 choices=get_speakers_id(model_file.value),
                 value=0,
                 interactive=True,
+                visible=False,
             )
             split_audio = gr.Checkbox(
-                label=i18n("Split Audio"),
+                label=i18n("Sesi Parçala"),
                 info=i18n(
-                    "Split the audio into chunks for inference to obtain better results in some cases."
+                    "Ses dosyasını belirli parçalar halinde işlem uygular (Bazı durumlarda daha iyi sonuçlar verir.."
                 ),
                 visible=True,
                 value=False,
@@ -159,7 +160,7 @@ def tts_tab():
             autotune = gr.Checkbox(
                 label=i18n("Autotune"),
                 info=i18n(
-                    "Apply a soft autotune to your inferences, recommended for singing conversions."
+                    "Sese autotune uygular. (Şarkı için kullanılması tavsiye edilir."
                 ),
                 visible=True,
                 value=False,
@@ -177,9 +178,9 @@ def tts_tab():
                 interactive=True,
             )
             clean_audio = gr.Checkbox(
-                label=i18n("Clean Audio"),
+                label=i18n("Sesi Temizleyin"),
                 info=i18n(
-                    "Clean your audio output using noise detection algorithms, recommended for speaking audios."
+                    "Sesi gürültüden arındırır."
                 ),
                 visible=True,
                 value=True,
@@ -188,9 +189,9 @@ def tts_tab():
             clean_strength = gr.Slider(
                 minimum=0,
                 maximum=1,
-                label=i18n("Clean Strength"),
+                label=i18n("Ses Temizle Gücü"),
                 info=i18n(
-                    "Set the clean-up level to the audio you want, the more you increase it the more it will clean up, but it is possible that the audio will be more compressed."
+                    "Temizleme seviyesini istediğiniz ses seviyesine ayarlayın, seviyeyi ne kadar artırırsanız o kadar fazla temizlenir, ancak sesin kalitesi düşebilir."
                 ),
                 visible=True,
                 value=0.5,
@@ -200,9 +201,9 @@ def tts_tab():
                 minimum=-24,
                 maximum=24,
                 step=1,
-                label=i18n("Pitch"),
+                label=i18n("Perde Ayarı"),
                 info=i18n(
-                    "Set the pitch of the audio, the higher the value, the higher the pitch."
+                    "Sesin perdesini ayarlayın, değer ne kadar yüksek olursa, perde de o kadar yüksek olur."
                 ),
                 value=0,
                 interactive=True,
@@ -216,6 +217,7 @@ def tts_tab():
                 ),
                 value=0.75,
                 interactive=True,
+                visible=False,
             )
             rms_mix_rate = gr.Slider(
                 minimum=0,
@@ -226,6 +228,7 @@ def tts_tab():
                 ),
                 value=1,
                 interactive=True,
+                visible=False,
             )
             protect = gr.Slider(
                 minimum=0,
@@ -236,6 +239,7 @@ def tts_tab():
                 ),
                 value=0.5,
                 interactive=True,
+                visible=False,
             )
             hop_length = gr.Slider(
                 minimum=1,
@@ -247,6 +251,7 @@ def tts_tab():
                 ),
                 value=128,
                 interactive=True,
+                visible=False,
             )
             f0_method = gr.Radio(
                 label=i18n("Pitch extraction algorithm"),
@@ -262,6 +267,7 @@ def tts_tab():
                 ],
                 value="rmvpe",
                 interactive=True,
+                visible=False,
             )
             embedder_model = gr.Radio(
                 label=i18n("Embedder Model"),
@@ -275,6 +281,7 @@ def tts_tab():
                 ],
                 value="contentvec",
                 interactive=True,
+                visible=False,
             )
             with gr.Column(visible=False) as embedder_custom:
                 with gr.Accordion(i18n("Custom Embedder"), open=True):
@@ -307,7 +314,7 @@ def tts_tab():
                 label=i18n(
                     "The f0 curve represents the variations in the base frequency of a voice over time, showing how pitch rises and falls."
                 ),
-                visible=True,
+                visible=False,
             )
 
     def enforce_terms(terms_accepted, *args):
