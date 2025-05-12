@@ -819,6 +819,7 @@ def inference_tab():
                             label=i18n("Select Custom Preset"),
                             choices=list_json_files(PRESETS_DIR),
                             interactive=True,
+                            visible=False,
                         )
                         presets_refresh_button = gr.Button(i18n("Refresh Presets"))
                     import_file = gr.File(
