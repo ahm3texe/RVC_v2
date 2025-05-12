@@ -71,6 +71,8 @@ css_code = """
     left: 10px;
     z-index: 9999;
     height: 40px;
+    width: auto;
+    border-radius: 6px;
 }
 """
 
@@ -79,8 +81,10 @@ with gr.Blocks(
     title="Voicy",
     css=css_code + "footer{display:none !important}"
 ) as Applio:
+    # Sol üst logo
     gr.HTML('<img id="app-logo" src="file/assets/1.jpg" />')
 
+    # Başlık ve açıklamalar
     gr.Markdown("# Voicy")
     gr.Markdown(
         i18n("İstanbul Sabahattin Zaim Üniversitesi  \nYüksek Kalitede Ses Klonlama Hizmeti")
