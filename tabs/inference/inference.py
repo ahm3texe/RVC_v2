@@ -984,7 +984,7 @@ def inference_tab():
                     visible=False,
                 )
 
-        convert_button1 = gr.Button(i18n("Convert"))
+        convert_button1 = gr.Button(i18n("Dönüştür"))
 
         with gr.Row():
             vc_output1 = gr.Textbox(
