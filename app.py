@@ -67,7 +67,15 @@ my_applio = loadThemes.load_theme() or "ParityError/Interstellar"
 with gr.Blocks(
     theme=my_applio, title="Voicy", css="footer{display:none !important}"
 ) as Applio:
-    gr.Markdown("# Voicy")
+    with gr.Row():
+        gr.Image(
+            value="assets/favicon.ico",  # Logonun dosya yolu
+            width=50,
+            height=50,
+            show_label=False,
+            container=False,
+        )
+        gr.Markdown("## Voicy")
     gr.Markdown(
         i18n(
             "İstanbul Sabahattin Zaim Üniversitesi  \nYüksek Kalitede Ses Klonlama Hizmeti"
