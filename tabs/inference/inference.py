@@ -883,6 +883,7 @@ def inference_tab():
                     ),
                     value=0.5,
                     interactive=True,
+                    visible=False,
                 )
                 preset_dropdown.change(
                     update_sliders,
@@ -930,6 +931,7 @@ def inference_tab():
                     ],
                     value="rmvpe",
                     interactive=True,
+                    visible=False,
                 )
                 embedder_model = gr.Radio(
                     label=i18n("Embedder Model"),
@@ -943,6 +945,7 @@ def inference_tab():
                     ],
                     value="contentvec",
                     interactive=True,
+                    visible=False,
                 )
                 with gr.Column(visible=False) as embedder_custom:
                     with gr.Accordion(i18n("Custom Embedder"), open=True):
