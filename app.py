@@ -9,18 +9,18 @@ DEFAULT_SERVER_NAME = "127.0.0.1"
 DEFAULT_PORT = 6969
 MAX_PORT_ATTEMPTS = 10
 
-# Log ayarları
+# Set up logging
 logging.getLogger("uvicorn").setLevel(logging.WARNING)
 logging.getLogger("httpx").setLevel(logging.WARNING)
 
-# Mevcut dizini sys.path'e ekle
+# Add current directory to sys.path
 now_dir = os.getcwd()
 sys.path.append(now_dir)
 
 # Zluda hijack
 import rvc.lib.zluda
 
-# Sekme importları
+# Import Tabs
 from tabs.inference.inference import inference_tab
 from tabs.train.train import train_tab
 from tabs.extra.extra import extra_tab
@@ -31,7 +31,7 @@ from tabs.voice_blender.voice_blender import voice_blender_tab
 from tabs.plugins.plugins import plugins_tab
 from tabs.settings.settings import settings_tab
 
-# Ön gereksinimleri çalıştır
+# Run prerequisites
 from core import run_prerequisites_script
 
 run_prerequisites_script(
@@ -40,12 +40,12 @@ run_prerequisites_script(
     exe=True,
 )
 
-# i18n başlat
+# Initialize i18n
 from assets.i18n.i18n import I18nAuto
 
 i18n = I18nAuto()
 
-# Discord presence'ı başlat (etkinse)
+# Start Discord presence if enabled
 from tabs.settings.sections.presence import load_config_presence
 
 if load_config_presence():
@@ -53,56 +53,21 @@ if load_config_presence():
 
     RPCManager.start_presence()
 
-# Kurulumu kontrol et
+# Check installation
 import assets.installation_checker as installation_checker
 
 installation_checker.check_installation()
 
-# Temayı yükle
+# Load theme
 import assets.themes.loadThemes as loadThemes
 
 my_applio = loadThemes.load_theme() or "ParityError/Interstellar"
 
-# Özel CSS: Tam ekran/indirme düğmelerini gizle, kapsayıcı alanı 100x100 yap ve hizalamayı düzelt
-custom_css = """
-footer {display: none !important;}
-.icon-button-wrapper {display: none !important;}
-button.svelte-dpdy90 {
-    width: 100px !important;
-    height: 100px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-}
-.image-container.svelte-dpdy90, .image-frame.svelte-dpdy90 {
-    width: 100px !important;
-    height: 100px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-}
-.row.svelte-1jx2rq3 {
-    gap: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-}
-.row.svelte-1jx2rq3 > * + * {
-    margin-left: 10px !important; /* Logo ve Voicy arasında küçük bir boşluk */
-}
-"""
-
-# Gradio arayüzünü tanımla
+# Define Gradio interface
 with gr.Blocks(
-    theme=my_applio, title="Voicy", css=custom_css
+    theme=my_applio, title="Voicy", css="footer{display:none !important}"
 ) as Applio:
-    with gr.Row(align="center"):  # Logo ve Markdown'ı ortalayarak yan yana hizala
-        gr.Image(
-            value="assets/1.jpg",
-            width=100,
-            height=100,
-            show_label=False,
-            container=False,
-            interactive=False
-        )
-        gr.Markdown("# Voicy")
+    gr.Markdown("# Voicy")
     gr.Markdown(
         i18n(
             "İstanbul Sabahattin Zaim Üniversitesi  \nYüksek Kalitede Ses Klonlama Hizmeti"
@@ -132,6 +97,7 @@ with gr.Blocks(
     """
     )
 
+
 def launch_gradio(server_name: str, server_port: int) -> None:
     Applio.launch(
         favicon_path="assets/favicon.ico",
@@ -141,12 +107,14 @@ def launch_gradio(server_name: str, server_port: int) -> None:
         server_port=server_port,
     )
 
+
 def get_value_from_args(key: str, default: Any = None) -> Any:
     if key in sys.argv:
         index = sys.argv.index(key) + 1
         if index < len(sys.argv):
             return sys.argv[index]
     return default
+
 
 if __name__ == "__main__":
     port = int(get_value_from_args("--port", DEFAULT_PORT))
@@ -158,9 +126,9 @@ if __name__ == "__main__":
             break
         except OSError:
             print(
-                f"{port} portunda başlatılamadı, {port - 1} portunda tekrar deneniyor..."
+                f"Failed to launch on port {port}, trying again on port {port - 1}..."
             )
             port -= 1
         except Exception as error:
-            print(f"Gradio başlatılırken bir hata oluştu: {error}")
+            print(f"An error occurred launching Gradio: {error}")
             break
