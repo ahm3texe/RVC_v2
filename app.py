@@ -67,7 +67,9 @@ my_applio = loadThemes.load_theme() or "ParityError/Interstellar"
 with gr.Blocks(
     theme=my_applio, title="Voicy", css="footer{display:none !important}"
 ) as Applio:
-    gr.Markdown("# Voicy")
+    with gr.Row():  # Create a horizontal row for logo and Markdown
+        gr.Image(value="assets/1.jpg", width=100, show_label=False, container=False)  # Add logo
+        gr.Markdown("# Voicy")  # Voicy title
     gr.Markdown(
         i18n(
             "İstanbul Sabahattin Zaim Üniversitesi  \nYüksek Kalitede Ses Klonlama Hizmeti"
