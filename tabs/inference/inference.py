@@ -981,7 +981,7 @@ def inference_tab():
                     label=i18n(
                         "The f0 curve represents the variations in the base frequency of a voice over time, showing how pitch rises and falls."
                     ),
-                    visible=True,
+                    visible=False,
                 )
 
         def enforce_terms(terms_accepted, *args):
