@@ -63,7 +63,7 @@ import assets.themes.loadThemes as loadThemes
 
 my_applio = loadThemes.load_theme() or "ParityError/Interstellar"
 
-# Özel CSS: Tam ekran/indirme düğmelerini gizle ve kapsayıcı alanı 100x100 yap
+# Özel CSS: Tam ekran/indirme düğmelerini gizle, kapsayıcı alanı 100x100 yap ve hizalamayı düzelt
 custom_css = """
 footer {display: none !important;}
 .icon-button-wrapper {display: none !important;}
@@ -81,6 +81,11 @@ button.svelte-dpdy90 {
 }
 .row.svelte-1jx2rq3 {
     gap: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+}
+.row.svelte-1jx2rq3 > * + * {
+    margin-left: 10px !important; /* Logo ve Voicy arasında küçük bir boşluk */
 }
 """
 
