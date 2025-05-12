@@ -66,17 +66,7 @@ def tts_tab():
                 allow_custom_value=True,
             )
         with gr.Row():
-            unload_button = gr.Button(i18n("Unload Voice"))
             refresh_button = gr.Button(i18n("Yenile"))
-
-            unload_button.click(
-                fn=lambda: (
-                    {"value": "", "__type__": "update"},
-                    {"value": "", "__type__": "update"},
-                ),
-                inputs=[],
-                outputs=[model_file, index_file],
-            )
 
             model_file.select(
                 fn=lambda model_file_value: match_index(model_file_value),
@@ -86,7 +76,7 @@ def tts_tab():
 
     gr.Markdown(
         i18n(
-            f"Applio is a Speech-to-Speech conversion software, utilizing EdgeTTS as middleware for running the Text-to-Speech (TTS) component. Read more about it [here!](https://docs.applio.org/applio/getting-started/tts)"
+            f"Voicy, Konuşmadan Konuşmaya (Speech-to-Speech) dönüştürme yazılımıdır ve metinden konuşmaya (TTS) bileşenini çalıştırmak için EdgeTTS’i ara katman olarak kullanır."
         )
     )
     tts_voice = gr.Dropdown(
