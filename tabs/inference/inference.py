@@ -474,9 +474,8 @@ def inference_tab():
                         "Formant shifting etkinleştir. Erkekten kadına ve tam tersi dönüşümlerde kullanılır."
                     ),
                     value=False,
-                    visible=True,
-                    interactive=True,
                     visible=False,
+                    interactive=True,
                 )
                 post_process = gr.Checkbox(
                     label=i18n("Post-Process"),
