@@ -45,6 +45,14 @@ from assets.i18n.i18n import I18nAuto
 
 i18n = I18nAuto()
 
+# Start Discord presence if enabled
+from tabs.settings.sections.presence import load_config_presence
+
+if load_config_presence():
+    from assets.discord_presence import RPCManager
+
+    RPCManager.start_presence()
+
 # Check installation
 import assets.installation_checker as installation_checker
 
@@ -57,7 +65,23 @@ my_applio = loadThemes.load_theme() or "ParityError/Interstellar"
 
 # Define Gradio interface
 with gr.Blocks(
-    theme=my_applio, title="Applio", css="footer{display:none !important}"
+    theme=my_applio,
+    title="Voicy",
+    css="""
+        #voicy-logo {
+            max-height: 81px;
+            margin-left: -25px;
+            margin-top: 10px;
+            display: block;
+        }
+        .logo-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            height: 80px;
+        }
+        footer {display:none !important}
+    """
 ) as Applio:
     with gr.Row():
         gr.HTML(
