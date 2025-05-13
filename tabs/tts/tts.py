@@ -74,7 +74,7 @@ def tts_tab():
 
     gr.Markdown(
         i18n(
-            "Voicy, Konuşmadan Konuşmaya (Speech-to-Speech) dönüştürme yazılımıdır ve metinden konuşmaya (TTS) bileşenini çalıştırmak için EdgeTTS’i ara katman olarak kullanır."
+            f"Voicy, Konuşmadan Konuşmaya (Speech-to-Speech) dönüştürme yazılımıdır ve metinden konuşmaya (TTS) bileşenini çalıştırmak için EdgeTTS’i ara katman olarak kullanır."
         )
     )
     tts_voice = gr.Dropdown(
@@ -95,13 +95,27 @@ def tts_tab():
         interactive=True,
     )
 
-    # Yalnızca Metinde Konuşmaya
-    tts_text = gr.Textbox(
-        label=i18n("Sentezlenecek Metin"),
-        info=i18n("Sentezlenmesini İstediğiniz Metni Giriniz."),
-        placeholder=i18n("Sentezlenmesini İstediğiniz Metni Giriniz."),
-        lines=3,
-    )
+    with gr.Tabs():
+        with gr.Tab(label="Metinde Konuşmaya"):
+            tts_text = gr.Textbox(
+                label=i18n("Sentezlenecek Metin"),
+                info=i18n("Sentezlenmesini İstediğiniz Metni Giriniz."),
+                placeholder=i18n("Sentezlenmesini İstediğiniz Metni Giriniz."),
+                lines=3,
+            )
+        with gr.Tab(label="File to Speech"):
+            txt_file = gr.File(
+                label=i18n("Upload a .txt file"),
+                type="filepath",
+            )
+            input_tts_path = gr.Textbox(
+                label=i18n("Input path for text file"),
+                placeholder=i18n(
+                    "The path to the text file that contains content for text to speech."
+                ),
+                value="",
+                interactive=True,
+            )
 
     with gr.Accordion(i18n("Ekstra Ayarlar"), open=False):
         with gr.Column():
@@ -134,14 +148,18 @@ def tts_tab():
             )
             split_audio = gr.Checkbox(
                 label=i18n("Sesi Parçala"),
-                info=i18n("Ses dosyasını belirli parçalar halinde işlem uygular."),
+                info=i18n(
+                    "Ses dosyasını belirli parçalar halinde işlem uygular (Bazı durumlarda daha iyi sonuçlar verir.."
+                ),
                 visible=True,
                 value=False,
                 interactive=True,
             )
             autotune = gr.Checkbox(
                 label=i18n("Autotune"),
-                info=i18n("Sese autotune uygular."),
+                info=i18n(
+                    "Sese autotune uygular. (Şarkı için kullanılması tavsiye edilir."
+                ),
                 visible=True,
                 value=False,
                 interactive=True,
@@ -150,14 +168,18 @@ def tts_tab():
                 minimum=0,
                 maximum=1,
                 label=i18n("Autotune Strength"),
-                info=i18n("Set the autotune strength."),
+                info=i18n(
+                    "Set the autotune strength - the more you increase it the more it will snap to the chromatic grid."
+                ),
                 visible=False,
                 value=1,
                 interactive=True,
             )
             clean_audio = gr.Checkbox(
                 label=i18n("Sesi Temizleyin"),
-                info=i18n("Sesi gürültüden arındırır."),
+                info=i18n(
+                    "Sesi gürültüden arındırır."
+                ),
                 visible=True,
                 value=True,
                 interactive=True,
@@ -166,7 +188,9 @@ def tts_tab():
                 minimum=0,
                 maximum=1,
                 label=i18n("Ses Temizle Gücü"),
-                info=i18n("Temizleme seviyesini ayarlayın."),
+                info=i18n(
+                    "Temizleme seviyesini istediğiniz ses seviyesine ayarlayın, seviyeyi ne kadar artırırsanız o kadar fazla temizlenir, ancak sesin kalitesi düşebilir."
+                ),
                 visible=True,
                 value=0.5,
                 interactive=True,
@@ -176,17 +200,127 @@ def tts_tab():
                 maximum=24,
                 step=1,
                 label=i18n("Perde Ayarı"),
-                info=i18n("Sesin perdesini ayarlayın."),
+                info=i18n(
+                    "Sesin perdesini ayarlayın, değer ne kadar yüksek olursa, perde de o kadar yüksek olur."
+                ),
                 value=0,
                 interactive=True,
             )
-            # ... diğer ekstra ayarlar ...
+            index_rate = gr.Slider(
+                minimum=0,
+                maximum=1,
+                label=i18n("Search Feature Ratio"),
+                info=i18n(
+                    "Influence exerted by the index file; a higher value corresponds to greater influence. However, opting for lower values can help mitigate artifacts present in the audio."
+                ),
+                value=0.75,
+                interactive=True,
+                visible=False,
+            )
+            rms_mix_rate = gr.Slider(
+                minimum=0,
+                maximum=1,
+                label=i18n("Volume Envelope"),
+                info=i18n(
+                    "Substitute or blend with the volume envelope of the output. The closer the ratio is to 1, the more the output envelope is employed."
+                ),
+                value=1,
+                interactive=True,
+                visible=False,
+            )
+            protect = gr.Slider(
+                minimum=0,
+                maximum=0.5,
+                label=i18n("Protect Voiceless Consonants"),
+                info=i18n(
+                    "Safeguard distinct consonants and breathing sounds to prevent electro-acoustic tearing and other artifacts. Pulling the parameter to its maximum value of 0.5 offers comprehensive protection. However, reducing this value might decrease the extent of protection while potentially mitigating the indexing effect."
+                ),
+                value=0.5,
+                interactive=True,
+                visible=False,
+            )
+            hop_length = gr.Slider(
+                minimum=1,
+                maximum=512,
+                step=1,
+                label=i18n("Hop Length"),
+                info=i18n(
+                    "Denotes the duration it takes for the system to transition to a significant pitch change. Smaller hop lengths require more time for inference but tend to yield higher pitch accuracy."
+                ),
+                value=128,
+                interactive=True,
+                visible=False,
+            )
+            f0_method = gr.Radio(
+                label=i18n("Pitch extraction algorithm"),
+                info=i18n(
+                    "Pitch extraction algorithm to use for the audio conversion. The default algorithm is rmvpe, which is recommended for most cases."
+                ),
+                choices=[
+                    "crepe",
+                    "crepe-tiny",
+                    "rmvpe",
+                    "fcpe",
+                    "hybrid[rmvpe+fcpe]",
+                ],
+                value="rmvpe",
+                interactive=True,
+                visible=False,
+            )
+            embedder_model = gr.Radio(
+                label=i18n("Embedder Model"),
+                info=i18n("Model used for learning speaker embedding."),
+                choices=[
+                    "contentvec",
+                    "chinese-hubert-base",
+                    "japanese-hubert-base",
+                    "korean-hubert-base",
+                    "custom",
+                ],
+                value="contentvec",
+                interactive=True,
+                visible=False,
+            )
+            with gr.Column(visible=False) as embedder_custom:
+                with gr.Accordion(i18n("Custom Embedder"), open=True):
+                    with gr.Row():
+                        embedder_model_custom = gr.Dropdown(
+                            label=i18n("Select Custom Embedder"),
+                            choices=refresh_embedders_folders(),
+                            interactive=True,
+                            allow_custom_value=True,
+                        )
+                        refresh_embedders_button = gr.Button(i18n("Refresh embedders"))
+                    folder_name_input = gr.Textbox(
+                        label=i18n("Folder Name"), interactive=True
+                    )
+                    with gr.Row():
+                        bin_file_upload = gr.File(
+                            label=i18n("Upload .bin"),
+                            type="filepath",
+                            interactive=True,
+                        )
+                        config_file_upload = gr.File(
+                            label=i18n("Upload .json"),
+                            type="filepath",
+                            interactive=True,
+                        )
+                    move_files_button = gr.Button(
+                        i18n("Move files to custom embedder folder")
+                    )
             f0_file = gr.File(
                 label=i18n(
-                    "The f0 curve represents the variations in the base frequency..."
+                    "The f0 curve represents the variations in the base frequency of a voice over time, showing how pitch rises and falls."
                 ),
                 visible=False,
             )
+
+    def enforce_terms(terms_accepted, *args):
+        if not terms_accepted:
+            message = "You must agree to the Terms of Use to proceed."
+            gr.Info(message)
+            return message, None
+        return run_tts_script(*args)
 
     convert_button = gr.Button(i18n("Convert"))
 
@@ -197,7 +331,6 @@ def tts_tab():
         )
         vc_output2 = gr.Audio(label=i18n("Oluşturulan Ses"))
 
-    # Gerekli görünümleri toggle etmek için callback’ler
     def toggle_visible(checkbox):
         return {"visible": checkbox, "__type__": "update"}
 
@@ -206,23 +339,45 @@ def tts_tab():
             return {"visible": True, "__type__": "update"}
         return {"visible": False, "__type__": "update"}
 
-    autotune.change(fn=toggle_visible, inputs=[autotune], outputs=[autotune_strength])
-    clean_audio.change(fn=toggle_visible, inputs=[clean_audio], outputs=[clean_strength])
-    embedder_model.change(
-        fn=toggle_visible_embedder_custom,
-        inputs=[embedder_model],
-        outputs=[embedder_custom],
+    autotune.change(
+        fn=toggle_visible,
+        inputs=[autotune],
+        outputs=[autotune_strength],
+    )
+    clean_audio.change(
+        fn=toggle_visible,
+        inputs=[clean_audio],
+        outputs=[clean_strength],
     )
     refresh_button.click(
         fn=change_choices,
         inputs=[model_file],
         outputs=[model_file, index_file, sid, sid],
     )
-
-    # Son olarak Convert tuşuna basıldığında yalnızca tts_text’i alıyoruz
+    txt_file.upload(
+        fn=process_input,
+        inputs=[txt_file],
+        outputs=[input_tts_path, txt_file],
+    )
+    embedder_model.change(
+        fn=toggle_visible_embedder_custom,
+        inputs=[embedder_model],
+        outputs=[embedder_custom],
+    )
+    move_files_button.click(
+        fn=create_folder_and_move_files,
+        inputs=[folder_name_input, bin_file_upload, config_file_upload],
+        outputs=[],
+    )
+    refresh_embedders_button.click(
+        fn=lambda: gr.update(choices=refresh_embedders_folders()),
+        inputs=[],
+        outputs=[embedder_model_custom],
+    )
     convert_button.click(
         fn=run_tts_script,
         inputs=[
+            input_tts_path,
             tts_text,
             tts_voice,
             tts_rate,
