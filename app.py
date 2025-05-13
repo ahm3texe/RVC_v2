@@ -45,14 +45,6 @@ from assets.i18n.i18n import I18nAuto
 
 i18n = I18nAuto()
 
-# Start Discord presence if enabled
-from tabs.settings.sections.presence import load_config_presence
-
-if load_config_presence():
-    from assets.discord_presence import RPCManager
-
-    RPCManager.start_presence()
-
 # Check installation
 import assets.installation_checker as installation_checker
 
@@ -60,9 +52,15 @@ installation_checker.check_installation()
 
 # Tema Ayarı
 theme = gr.themes.Citrus(
-    primary_hue="red",
-    secondary_hue="red",
-    neutral_hue="slate",
+    primary_hue="blue",        # Açık tonlar
+    secondary_hue="green",
+    neutral_hue="gray",        # Açık gri
+    font=["Inter", "sans-serif"]
+).set(
+    body_background_fill="white",          # Arka plan açık
+    body_text_color="black",              # Yazı siyah
+    block_background_fill="white",        # Kutuların arka planı da açık
+    block_shadow="none"
 )
 
 # Define Gradio interface
