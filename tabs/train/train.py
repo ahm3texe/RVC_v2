@@ -309,11 +309,11 @@ def train_tab():
                     label=i18n("Model Adı"),
                     info=i18n("Yeni modelin adı."),
                     choices=get_models_list(),
-                    value="my-project",
+                    value="benim-projem",
                     interactive=True,
                     allow_custom_value=True,
                 )
-                architecture = gr.Radio(
+                architecture = gr.Radio( # silinebilir satır
                     label=i18n("Architecture"),
                     info=i18n(
                         "Choose the model architecture:\n- **RVC (V2)**: Default option, compatible with all clients.\n- **Applio**: Advanced quality with improved vocoders and higher sample rates, Applio-only."
@@ -408,11 +408,11 @@ def train_tab():
 
         with gr.Accordion(i18n("Advanced Settings"), open=False):
             cut_preprocess = gr.Radio(
-                label=i18n("Audio cutting"),
+                label=i18n("Ses Kesme"),
                 info=i18n(
-                    "Audio file slicing method: Select 'Skip' if the files are already pre-sliced, 'Simple' if excessive silence has already been removed from the files, or 'Automatic' for automatic silence detection and slicing around it."
+                    "Ses dosyası dilimleme yöntemi: Dosyalar zaten önceden dilimlenmişse ‘Atla’yı seçin, dosyalardan aşırı sessizlik zaten kaldırılmışsa ‘Basit’i seçin veya otomatik sessizlik algılama ve buna göre dilimleme için ‘Otomatik’i seçin."
                 ),
-                choices=["Skip", "Simple", "Automatic"],
+                choices=["Atla", "Basit", "Otomatik"],
                 value="Automatic",
                 interactive=True,
             )
@@ -422,8 +422,8 @@ def train_tab():
                     5.0,
                     3.0,
                     step=0.1,
-                    label=i18n("Chunk length (sec)"),
-                    info=i18n("Length of the audio slice for 'Simple' method."),
+                    label=i18n("Parça uzunluğu (saniye)"),
+                    info=i18n("‘Basit’ yöntemi için ses diliminin uzunluğu."),
                     interactive=True,
                 )
                 overlap_len = gr.Slider(
@@ -431,9 +431,9 @@ def train_tab():
                     0.4,
                     0.3,
                     step=0.1,
-                    label=i18n("Overlap length (sec)"),
+                    label=i18n("Çakışma uzunluğu (saniye)"),
                     info=i18n(
-                        "Length of the overlap between slices for 'Simple' method."
+                        "‘Basit’ yöntemi için dilimler arasındaki çakışma uzunluğu."
                     ),
                     interactive=True,
                 )
@@ -442,16 +442,16 @@ def train_tab():
                 process_effects = gr.Checkbox(
                     label=i18n("Process effects"),
                     info=i18n(
-                        "It's recommended to deactivate this option if your dataset has already been processed."
+                        "Veri kümeniz zaten işlenmişse bu seçeneğin devre dışı bırakılması önerilir."
                     ),
                     value=True,
                     interactive=True,
                     visible=True,
                 )
                 noise_reduction = gr.Checkbox(
-                    label=i18n("Noise Reduction"),
+                    label=i18n("Gürültü Azaltma"),
                     info=i18n(
-                        "It's recommended keep deactivate this option if your dataset has already been processed."
+                        "Veri kümeniz zaten işlenmişse bu seçeneğin devre dışı tutulması önerilir."
                     ),
                     value=False,
                     interactive=True,
@@ -460,17 +460,17 @@ def train_tab():
             clean_strength = gr.Slider(
                 minimum=0,
                 maximum=1,
-                label=i18n("Noise Reduction Strength"),
+                label=i18n("Gürültü Azaltma Gücü"),
                 info=i18n(
-                    "Set the clean-up level to the audio you want, the more you increase it the more it will clean up, but it is possible that the audio will be more compressed."
+                    "Verisetindeki seslerin temizlik düzeyini ayarlayın; ne kadar artırırsanız, o kadar fazla temizlenir, ancak sesin kalitesi düşer."
                 ),
                 visible=False,
                 value=0.5,
                 interactive=True,
             )
         preprocess_output_info = gr.Textbox(
-            label=i18n("Output Information"),
-            info=i18n("The output information will be displayed here."),
+            label=i18n("Çıktı Bilgisi"),
+            info=i18n("Çıktı bilgisi burada gösterilecektir."),
             value="",
             max_lines=8,
             interactive=False,
