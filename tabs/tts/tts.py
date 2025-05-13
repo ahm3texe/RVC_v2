@@ -31,17 +31,6 @@ with open(
 
 short_names = [voice.get("ShortName", "") for voice in tts_voices_data]
 
-
-def process_input(file_path):
-    try:
-        with open(file_path, "r", encoding="utf-8") as file:
-            file.read()
-        gr.Info(f"The file has been loaded!")
-        return file_path, file_path
-    except UnicodeDecodeError:
-        gr.Info(f"The file has to be in UTF-8 encoding.")
-        return None, None
-
 # TTS tab
 def tts_tab():
     with gr.Column():
@@ -102,19 +91,6 @@ def tts_tab():
                 info=i18n("Sentezlenmesini İstediğiniz Metni Giriniz."),
                 placeholder=i18n("Sentezlenmesini İstediğiniz Metni Giriniz."),
                 lines=3,
-            )
-        with gr.Tab(label="File to Speech"):
-            txt_file = gr.File(
-                label=i18n("Upload a .txt file"),
-                type="filepath",
-            )
-            input_tts_path = gr.Textbox(
-                label=i18n("Input path for text file"),
-                placeholder=i18n(
-                    "The path to the text file that contains content for text to speech."
-                ),
-                value="",
-                interactive=True,
             )
 
     with gr.Accordion(i18n("Ekstra Ayarlar"), open=False):
@@ -314,14 +290,6 @@ def tts_tab():
                 ),
                 visible=False,
             )
-
-    def enforce_terms(terms_accepted, *args):
-        if not terms_accepted:
-            message = "You must agree to the Terms of Use to proceed."
-            gr.Info(message)
-            return message, None
-        return run_tts_script(*args)
-
     convert_button = gr.Button(i18n("Convert"))
 
     with gr.Row():
@@ -354,11 +322,6 @@ def tts_tab():
         inputs=[model_file],
         outputs=[model_file, index_file, sid, sid],
     )
-    txt_file.upload(
-        fn=process_input,
-        inputs=[txt_file],
-        outputs=[input_tts_path, txt_file],
-    )
     embedder_model.change(
         fn=toggle_visible_embedder_custom,
         inputs=[embedder_model],
@@ -377,7 +340,6 @@ def tts_tab():
     convert_button.click(
         fn=run_tts_script,
         inputs=[
-            input_tts_path,
             tts_text,
             tts_voice,
             tts_rate,
