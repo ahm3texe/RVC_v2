@@ -340,6 +340,7 @@ def tts_tab():
     convert_button.click(
         fn=run_tts_script,
         inputs=[
+            input_tts_path,
             tts_text,
             tts_voice,
             tts_rate,
