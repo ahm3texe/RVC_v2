@@ -51,16 +51,29 @@ import assets.installation_checker as installation_checker
 installation_checker.check_installation()
 
 # Tema Ayarı
+import gradio as gr
+
+# Açık tema için özel ayarlanmış Citrus
 theme = gr.themes.Citrus(
     primary_hue="red",
     secondary_hue="red",
     neutral_hue="slate",
 ).set(
-    body_background_fill="white",          # Arka plan açık
+    body_background_fill="white",          # Arka plan beyaz
     body_text_color="black",              # Yazı siyah
-    block_background_fill="white",        # Kutuların arka planı da açık
-    block_shadow="none"
+    block_background_fill="white",        # Blok arkaplan beyaz
+    block_shadow="none"                   # Gölgeyi kapat
 )
+
+# Gradio CSS ile koyu mod zorlamasını önle (isteğe bağlı)
+custom_css = """
+@media (prefers-color-scheme: dark) {
+    html, body {
+        background: white !important;
+        color: black !important;
+    }
+}
+"""
 
 # Define Gradio interface
 with gr.Blocks(
