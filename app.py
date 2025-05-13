@@ -65,9 +65,27 @@ my_applio = loadThemes.load_theme() or "ParityError/Interstellar"
 
 # Define Gradio interface
 with gr.Blocks(
-    theme=my_applio, title="Voicy", css="footer{display:none !important}"
+    theme=my_applio,
+    title="Voicy",
+    css="""
+        #voicy-logo img {
+            max-height: 80px;
+            margin-left: 10px;
+        }
+        footer {display:none !important}
+    """
 ) as Applio:
-    gr.Markdown("# Voicy")
+    with gr.Row():
+        with gr.Column(scale=1, min_width=150):
+            gr.Image(
+                value="assets/logo.png",
+                show_label=False,
+                container=False,
+                show_download_button=False,
+                interactive=False,
+                elem_id="voicy-logo"
+            )
+
     gr.Markdown(
         i18n(
             "İstanbul Sabahattin Zaim Üniversitesi  \nYüksek Kalitede Ses Klonlama Hizmeti"
