@@ -25,8 +25,6 @@ audio_root = os.path.join(now_dir, "assets", "audios")
 custom_embedder_root = os.path.join(
     now_dir, "rvc", "models", "embedders", "embedders_custom"
 )
-
-PRESETS_DIR = os.path.join(now_dir, "assets", "presets")
 FORMANTSHIFT_DIR = os.path.join(now_dir, "assets", "formant_shift")
 
 os.makedirs(custom_embedder_root, exist_ok=True)
