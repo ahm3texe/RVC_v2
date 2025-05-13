@@ -52,10 +52,9 @@ installation_checker.check_installation()
 
 # Tema Ayarı
 theme = gr.themes.Citrus(
-    primary_hue="blue",        # Açık tonlar
-    secondary_hue="green",
-    neutral_hue="gray",        # Açık gri
-    font=["Inter", "sans-serif"]
+    primary_hue="red",
+    secondary_hue="red",
+    neutral_hue="slate",
 ).set(
     body_background_fill="white",          # Arka plan açık
     body_text_color="black",              # Yazı siyah
