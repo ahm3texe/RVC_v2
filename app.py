@@ -50,50 +50,14 @@ import assets.installation_checker as installation_checker
 
 installation_checker.check_installation()
 
-# Tema Ayarı
-import gradio as gr
+# Load theme
+import assets.themes.loadThemes as loadThemes
 
-# Açık tema için özel ayarlanmış Citrus
-theme = gr.themes.Citrus(
-    primary_hue="red",
-    secondary_hue="red",
-    neutral_hue="slate",
-).set(
-    body_background_fill="white",          # Arka plan beyaz
-    body_text_color="black",              # Yazı siyah
-    block_background_fill="white",        # Blok arkaplan beyaz
-    block_shadow="none"                   # Gölgeyi kapat
-)
-
-# Gradio CSS ile koyu mod zorlamasını önle (isteğe bağlı)
-custom_css = """
-@media (prefers-color-scheme: dark) {
-    html, body {
-        background: white !important;
-        color: black !important;
-    }
-}
-"""
+my_applio = loadThemes.load_theme() or "ParityError/Interstellar"
 
 # Define Gradio interface
 with gr.Blocks(
-    theme=theme,
-    title="Voicy",
-    css="""
-        #voicy-logo {
-            max-height: 81px;
-            margin-left: -25px;
-            margin-top: 10px;
-            display: block;
-        }
-        .logo-container {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            height: 80px;
-        }
-        footer {display:none !important}
-    """
+    theme=my_applio, title="Applio", css="footer{display:none !important}"
 ) as Applio:
     with gr.Row():
         gr.HTML(
