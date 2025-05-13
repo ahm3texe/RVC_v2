@@ -68,23 +68,25 @@ with gr.Blocks(
     theme=my_applio,
     title="Voicy",
     css="""
-        #voicy-logo img {
-            max-height: 80px;
+        #voicy-logo {
+            max-height: 60px;
             margin-left: 10px;
+            margin-top: 10px;
+            display: block;
+        }
+        .logo-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            height: 80px;
         }
         footer {display:none !important}
     """
 ) as Applio:
     with gr.Row():
-        with gr.Column(scale=1, min_width=150):
-            gr.Image(
-                value="assets/logo.png",
-                show_label=False,
-                container=False,
-                show_download_button=False,
-                interactive=False,
-                elem_id="voicy-logo"
-            )
+        gr.HTML(
+            '<div class="logo-container"><img id="voicy-logo" src="assets/logo.png" alt="Voicy Logo"></div>'
+        )
 
     gr.Markdown(
         i18n(
