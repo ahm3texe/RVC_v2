@@ -337,10 +337,14 @@ def tts_tab():
         inputs=[],
         outputs=[embedder_model_custom],
     )
+
+    # click bloğunun üstüne ekleyin
+    dummy_input_tts_path = gr.State("")  # hep boş
+
     convert_button.click(
         fn=run_tts_script,
         inputs=[
-            input_tts_path,
+            dummy_input_tts_path,
             tts_text,
             tts_voice,
             tts_rate,
