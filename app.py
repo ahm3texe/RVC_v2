@@ -58,14 +58,16 @@ import assets.installation_checker as installation_checker
 
 installation_checker.check_installation()
 
-# Load theme
-import assets.themes.loadThemes as loadThemes
-
-my_applio = loadThemes.load_theme() or "ParityError/Interstellar"
+# Tema Ayarı
+theme = gr.themes.Citrus(
+    primary_hue="red",
+    secondary_hue="red",
+    neutral_hue="slate",
+)
 
 # Define Gradio interface
 with gr.Blocks(
-    theme=my_applio,
+    theme=theme,
     title="Voicy",
     css="""
         #voicy-logo {
