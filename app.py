@@ -95,59 +95,20 @@ with gr.Blocks(
         footer {display:none !important}
     """
 ) as Applio:
-
-    # Tema geçiş durumu ve buton
-    theme_state = gr.State(value="light")
-    theme_css = gr.HTML("<style>body { background: white; color: black; }</style>")
-    toggle_button = gr.Button("🌙 Koyu Modu Aç")
-
-    def toggle_theme(current_theme):
-        if current_theme == "light":
-            css = """
-            <style>
-            body, .gradio-container {
-                background-color: #111 !important;
-                color: white !important;
-            }
-            </style>
-            """
-            return "dark", css, "☀️ Açık Modu Aç"
-        else:
-            css = """
-            <style>
-            body, .gradio-container {
-                background-color: white !important;
-                color: black !important;
-            }
-            </style>
-            """
-            return "light", css, "🌙 Koyu Modu Aç"
-
-    toggle_button.click(
-        toggle_theme,
-        inputs=[theme_state],
-        outputs=[theme_state, theme_css, toggle_button]
-    )
-
-    # Tema CSS ve geçiş butonunu göster
-    with gr.Row():
-        theme_css.render()
-        toggle_button.render()
-
-    # Logo
     with gr.Row():
         gr.HTML(
             '<div class="logo-container"><img id="voicy-logo" src="https://raw.githubusercontent.com/ahm3texe/RVC_v2/refs/heads/main/assets/logo.png" alt="Voicy Logo"></div>'
         )
 
-    # Açıklama
     gr.Markdown(
         i18n(
             "İstanbul Sabahattin Zaim Üniversitesi  \nYüksek Kalitede Ses Klonlama Hizmeti"
         )
     )
     gr.Markdown(
-        i18n("[GitHub](https://github.com/ahm3texe/RVC_v2)")
+        i18n(
+            "[GitHub](https://github.com/ahm3texe/RVC_v2)"
+        )
     )
     with gr.Tab(i18n("Klonlama Arayüzü")):
         inference_tab()
