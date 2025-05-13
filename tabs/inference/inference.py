@@ -374,7 +374,10 @@ def inference_tab():
     with gr.Tab(i18n("Single")):
         with gr.Column():
             upload_audio = gr.Audio(
-                label=i18n("Ses Dosyanızı Yükleyin"), type="filepath", editable=False
+                label="Ses Dosyanızı Yükleyin",
+                type="filepath",
+                editable=False,
+                elem_id="custom-audio-uploader"
             )
             with gr.Row():
                 audio = gr.Dropdown(
