@@ -69,8 +69,8 @@ with gr.Blocks(
     title="Voicy",
     css="""
         #voicy-logo {
-            max-height: 60px;
-            margin-left: 10px;
+            max-height: 81px;
+            margin-left: -25px;
             margin-top: 10px;
             display: block;
         }
