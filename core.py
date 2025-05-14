@@ -404,12 +404,14 @@ def run_tts_script(
         delay=None,
         sliders=None,
     )
-
-    return f"Text {tts_text} synthesized successfully.", output_rvc_path.replace(
-        ".wav", f".{export_format.lower()}"
+    
+    edge_tts_file = output_tts_path
+    final_rvc_file = output_rvc_path.replace(".wav", f".{export_format.lower()}")
+    return (
+        f"Text {tts_text} synthesized successfully.",  # vc_output1
+        edge_tts_file,                                  # vc_output3
+        final_rvc_file                                  # vc_output2
     )
-
-
 # Preprocess
 def run_preprocess_script(
     model_name: str,
