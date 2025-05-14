@@ -55,9 +55,17 @@ import assets.themes.loadThemes as loadThemes
 
 my_applio = loadThemes.load_theme() or "ParityError/Interstellar"
 
-# Define Gradio interface
+# Define the Citrus theme
+theme = gr.themes.Citrus(
+    primary_hue="red",
+    secondary_hue="red",
+    neutral_hue="gray",
+    radius_size=gr.themes.Size(lg="24px", md="15px", sm="20px", xl="28px", xs="8px", xxl="25px", xxs="6px"),
+)
+
+# Define Gradio interface with the Citrus theme
 with gr.Blocks(
-    theme=my_applio,
+    theme=theme,  # Use the Citrus theme here
     title="Voicy",
     css="""
         #voicy-logo {
