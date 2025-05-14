@@ -91,9 +91,8 @@ with gr.Blocks(
         )
 
     gr.Markdown(
-        i18n("İstanbul Sabahattin Zaim Üniversitesi  <br/>Yüksek Kalitede Ses Klonlama Hizmeti"),
-        elem_classes="right-align",
-        unsafe_allow_html=True
+        i18n("İstanbul Sabahattin Zaim Üniversitesi  \nYüksek Kalitede Ses Klonlama Hizmeti"),
+        elem_classes=["right-align"]
     )
     gr.Markdown(
         i18n(
