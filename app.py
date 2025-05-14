@@ -94,14 +94,14 @@ with gr.Blocks(
     css=combined_css
 ) as Applio:
 
-    # ← SAYFA AÇILIR AÇILMAZ DARK MODE ZORUNLU
+    # Zorunlu koyu tema
     gr.HTML(
         "<script>"
         "document.documentElement.setAttribute('data-theme','dark');"
         "</script>"
     )
 
-    # LOGO VE BAŞLIK
+    # Logo ve başlık
     with gr.Row():
         gr.HTML(
             '<div class="logo-container">'
@@ -110,33 +110,34 @@ with gr.Blocks(
             'alt="Voicy Logo"></div>'
         )
 
+    # Açıklamalar
     gr.Markdown(
         i18n(
             "İstanbul Sabahattin Zaim Üniversitesi  \n"
             "Yüksek Kalitede Ses Klonlama Hizmeti"
         )
     )
+    # ← Burada fazladan ) kaldırıldı
     gr.Markdown(
         i18n("[GitHub](https://github.com/ahm3texe/RVC_v2)")
-        )
     )
+
+    # Sekmeler
     with gr.Tab(i18n("Klonlama Arayüzü")):
         inference_tab()
-
     with gr.Tab(i18n("TTS")):
         tts_tab()
-
     with gr.Tab(i18n("Eğitim")):
         train_tab()
-
     with gr.Tab(i18n("Model İndirme")):
         download_tab()
 
+    # Alt bant
     gr.Markdown(
         """
-    <div style="text-align: center; font-size: 0.9em; text-color: a3a3a3;">
-    </div>
-    """
+        <div style="text-align: center; font-size: 0.9em; color:#a3a3a3;">
+        </div>
+        """
     )
 
 
