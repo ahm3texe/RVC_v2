@@ -1,5 +1,7 @@
 <h1 align="center">
-  <a href="https://www.izu.edu.tr/" target="_blank"><img src="https://www.izu.edu.tr/images/default-source/logo-galeri/1.jpg?sfvrsn=18698650_2" alt="IZU"></a>
+  <a href="https://www.izu.edu.tr/" target="_blank">
+    <img src="https://www.izu.edu.tr/images/default-source/logo-galeri/1.jpg?sfvrsn=18698650_2" alt="IZU" width="200">
+  </a>
 </h1>
 
 <p align="center">
