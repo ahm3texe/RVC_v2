@@ -76,6 +76,13 @@ with gr.Blocks(
             height: 80px;
         }
         footer {display:none !important}
+
+        /* Sağ hizalama + 20px içeri kaydırma */
+      .right-align {
+        text-align: right;
+        margin-left: 20px;
+      }
+      footer { display: none !important; }
     """
 ) as Applio:
     with gr.Row():
@@ -84,9 +91,9 @@ with gr.Blocks(
         )
 
     gr.Markdown(
-        i18n(
-            "İstanbul Sabahattin Zaim Üniversitesi  \nYüksek Kalitede Ses Klonlama Hizmeti"
-        )
+        i18n("İstanbul Sabahattin Zaim Üniversitesi  <br/>Yüksek Kalitede Ses Klonlama Hizmeti"),
+        elem_classes="right-align",
+        unsafe_allow_html=True
     )
     gr.Markdown(
         i18n(
