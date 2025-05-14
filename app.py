@@ -52,7 +52,6 @@ installation_checker.check_installation()
 
 # Load theme
 import assets.themes.loadThemes as loadThemes
-
 my_applio = loadThemes.load_theme() or "ParityError/Interstellar"
 
 # Define the Citrus theme
@@ -60,56 +59,65 @@ theme = gr.themes.Citrus(
     primary_hue="red",
     secondary_hue="red",
     neutral_hue="gray",
-    radius_size=gr.themes.Size(lg="24px", md="15px", sm="20px", xl="28px", xs="8px", xxl="25px", xxs="6px"),
+    radius_size=gr.themes.Size(
+        lg="24px", md="15px", sm="20px",
+        xl="28px", xs="8px", xxl="25px", xxs="6px"
+    ),
 )
 
-js_func = """
-function refresh() {
-    const url = new URL(window.location);
-    // Eğer zaten dark değilse, parametreyi ekle ve sayfayı yenile
-    if (url.searchParams.get('__theme') !== 'dark') {
-        url.searchParams.set('__theme', 'dark');
-        window.location.href = url.href;
+# Tüm CSS’inizi buraya toplayın
+combined_css = """
+    /* (Opsiyonel) Tema geçiş butonunu gizle */
+    button[aria-label="Toggle theme"] { display: none !important; }
+
+    /* Logo stiliniz */
+    #voicy-logo {
+        max-height: 81px;
+        margin-left: -25px;
+        margin-top: 10px;
+        display: block;
     }
-}
-// Fonksiyonu hemen çağır
-refresh();
+    .logo-container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 80px;
+    }
+
+    /* Footer’ı gizle */
+    footer { display: none !important; }
 """
 
-# Define Gradio interface with the Citrus theme
 with gr.Blocks(
-    js=js_func,
-    theme=theme,  # Use the Citrus theme here
+    theme=theme,
     title="Voicy",
-    css="""
-        #voicy-logo {
-            max-height: 81px;
-            margin-left: -25px;
-            margin-top: 10px;
-            display: block;
-        }
-        .logo-container {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            height: 80px;
-        }
-        footer {display:none !important}
-    """
+    css=combined_css
 ) as Applio:
+
+    # ← SAYFA AÇILIR AÇILMAZ DARK MODE ZORUNLU
+    gr.HTML(
+        "<script>"
+        "document.documentElement.setAttribute('data-theme','dark');"
+        "</script>"
+    )
+
+    # LOGO VE BAŞLIK
     with gr.Row():
         gr.HTML(
-            '<div class="logo-container"><img id="voicy-logo" src="https://raw.githubusercontent.com/ahm3texe/RVC_v2/refs/heads/main/assets/logo.png" alt="Voicy Logo"></div>'
+            '<div class="logo-container">'
+            '<img id="voicy-logo" '
+            'src="https://raw.githubusercontent.com/ahm3texe/RVC_v2/refs/heads/main/assets/logo.png" '
+            'alt="Voicy Logo"></div>'
         )
 
     gr.Markdown(
         i18n(
-            "İstanbul Sabahattin Zaim Üniversitesi  \nYüksek Kalitede Ses Klonlama Hizmeti"
+            "İstanbul Sabahattin Zaim Üniversitesi  \n"
+            "Yüksek Kalitede Ses Klonlama Hizmeti"
         )
     )
     gr.Markdown(
-        i18n(
-            "[GitHub](https://github.com/ahm3texe/RVC_v2)"
+        i18n("[GitHub](https://github.com/ahm3texe/RVC_v2)")
         )
     )
     with gr.Tab(i18n("Klonlama Arayüzü")):
