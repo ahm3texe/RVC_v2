@@ -4,35 +4,10 @@
   </a>
 </h1>
 
-<p align="center">
-    <img alt="Contributors" src="https://img.shields.io/github/contributors/iahispano/applio?style=for-the-badge&color=FFFFFF" />
-    <img alt="Release" src="https://img.shields.io/github/release/iahispano/applio?style=for-the-badge&color=FFFFFF" />
-    <img alt="Stars" src="https://img.shields.io/github/stars/iahispano/applio?style=for-the-badge&color=FFFFFF" />
-    <img alt="Fork" src="https://img.shields.io/github/forks/iahispano/applio?style=for-the-badge&color=FFFFFF" />
-    <img alt="Issues" src="https://img.shields.io/github/issues/iahispano/applio?style=for-the-badge&color=FFFFFF" />
-</p>
 
-<p align="center">A simple, high-quality voice conversion tool, focused on ease of use and performance.</p>
 
-<p align="center">
-  <a href="https://applio.org" target="_blank">🌐 Website</a>
-  •
-  <a href="https://docs.applio.org" target="_blank">📚 Documentation</a>
-  •
-  <a href="https://discord.gg/urxFjYmYYh" target="_blank">☎️ Discord</a>
-</p>
+<p align="center">Sistem Analizi ve Tasarım Projesi /n RVC v2</p>
 
-<p align="center">
-  <a href="https://github.com/IAHispano/Applio-Plugins" target="_blank">🛒 Plugins</a>
-  •
-  <a href="https://huggingface.co/IAHispano/Applio/tree/main/Compiled" target="_blank">📦 Compiled</a>
-  •
-  <a href="https://applio.org/playground" target="_blank">🎮 Playground</a>
-  •
-  <a href="https://colab.research.google.com/github/iahispano/applio/blob/master/assets/Applio.ipynb" target="_blank">🔎 Google Colab (UI)</a>
-  •
-  <a href="https://colab.research.google.com/github/iahispano/applio/blob/master/assets/Applio_NoUI.ipynb" target="_blank">🔎 Google Colab (No UI)</a>
-</p>
 
 ## Introduction
 
