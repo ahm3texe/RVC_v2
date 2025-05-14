@@ -342,7 +342,7 @@ def train_tab():
                     visible=False,  # to be visible once pretraineds are ready
                 )
         with gr.Accordion(
-            i18n("Advanced Settings"),
+            i18n("Ekstra Ayarlar"),
             open=False,
         ):
             with gr.Row():
@@ -499,9 +499,9 @@ def train_tab():
     with gr.Accordion(i18n("Extract")):
         with gr.Row():
             f0_method = gr.Radio(
-                label=i18n("Pitch extraction algorithm"),
+                label=i18n("Pitch çıkartma algoritması"),
                 info=i18n(
-                    "Pitch extraction algorithm to use for the audio conversion. The default algorithm is rmvpe, which is recommended for most cases."
+                    "Ses dönüştürme için kullanılacak perde çıkarma algoritması. Varsayılan algoritma çoğu durumda önerilen rmvpe'dir."
                 ),
                 choices=["crepe", "crepe-tiny", "rmvpe"],
                 value="rmvpe",
@@ -510,7 +510,7 @@ def train_tab():
 
             embedder_model = gr.Radio(
                 label=i18n("Embedder Model"),
-                info=i18n("Model used for learning speaker embedding."),
+                info=i18n("Konuşmayı öğrenecek olan embedding model."),
                 choices=[
                     "contentvec",
                     "chinese-hubert-base",
@@ -526,9 +526,9 @@ def train_tab():
             10,
             2,
             step=1,
-            label=i18n("Silent training files"),
+            label=i18n("Sessiz eğitim dosyaları"),
             info=i18n(
-                "Adding several silent files to the training set enables the model to handle pure silence in inferred audio files. Select 0 if your dataset is clean and already contains segments of pure silence."
+                "Eğitim setine birkaç sessiz dosya eklemek, modelin çıkarılan ses dosyalarındaki saf sessizliği işlemesini sağlar. Veri setiniz temizse ve zaten saf sessizlik segmentleri içeriyorsa 0'ı seçin."
             ),
             value=True,
             interactive=True,
@@ -566,13 +566,13 @@ def train_tab():
                 move_files_button = gr.Button("Move files to custom embedder folder")
 
         extract_output_info = gr.Textbox(
-            label=i18n("Output Information"),
-            info=i18n("The output information will be displayed here."),
+            label=i18n("Çıktı Bilgisi"),
+            info=i18n("Çıktı bilgisi burada gösterilecektir."),
             value="",
             max_lines=8,
             interactive=False,
         )
-        extract_button = gr.Button(i18n("Extract Features"))
+        extract_button = gr.Button(i18n("Özellikleri Çıkar"))
         extract_button.click(
             fn=run_extract_script,
             inputs=[
@@ -597,9 +597,9 @@ def train_tab():
                 50,
                 max_vram_gpu(0),
                 step=1,
-                label=i18n("Batch Size"),
+                label=i18n("Batch Boyutu"),
                 info=i18n(
-                    "It's advisable to align it with the available VRAM of your GPU. A setting of 4 offers improved accuracy but slower processing, while 8 provides faster and standard results."
+                    "Bu değeri GPU’nuzun kullanılabilir VRAM miktarıyla uyumlu hale getirmek önerilir. “4” daha yüksek doğruluk sunar ancak daha yavaş çalışır; “8” ise daha hızlı ve standart sonuçlar verir."
                 ),
                 interactive=True,
             )
@@ -608,8 +608,8 @@ def train_tab():
                 100,
                 10,
                 step=1,
-                label=i18n("Save Every Epoch"),
-                info=i18n("Determine at how many epochs the model will saved at."),
+                label=i18n("Her Epochta Kaydet"),
+                info=i18n("Modelin kaç epochta bir kaydedileceğini belirleyin."),
                 interactive=True,
             )
             total_epoch = gr.Slider(
@@ -617,13 +617,13 @@ def train_tab():
                 10000,
                 500,
                 step=1,
-                label=i18n("Total Epoch"),
+                label=i18n("Toplam Epoch"),
                 info=i18n(
-                    "Specifies the overall quantity of epochs for the model training process."
+                    "Model eğitim süreci için toplam epoch sayısını belirtir."
                 ),
                 interactive=True,
             )
-        with gr.Accordion(i18n("Advanced Settings"), open=False):
+        with gr.Accordion(i18n("Ekstra Ayarlar"), open=False):
             with gr.Row():
                 with gr.Column():
                     save_only_latest = gr.Checkbox(
