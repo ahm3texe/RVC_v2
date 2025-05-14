@@ -80,7 +80,7 @@ with gr.Blocks(
 ) as Applio:
     with gr.Row():
         gr.HTML(
-            '<div class="logo-container"><img id="voicy-logo" src="https://raw.githubusercontent.com/ahm3texe/RVC_v2/refs/heads/main/assets/logo.png" alt="Voicy Logo"></div>'
+            '<div class="logo-container"><img id="voicy-logo" src="https://raw.githubusercontent.com/ahm3texe/RVC_v2/refs/heads/main/assets/logoizu.png" alt="Voicy Logo"></div>'
         )
 
     gr.Markdown(
