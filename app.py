@@ -76,15 +76,11 @@ function refresh() {
 refresh();
 """
 
+# Define Gradio interface with the Citrus theme
 with gr.Blocks(
     js=js_func,
-    theme=theme,         # sizin Citrus tema tanımınız
+    theme=theme,  # Use the Citrus theme here
     title="Voicy",
-    css="""
-        /* ...mevcut CSS’iniz... */
-    """
-) as Applio:
-    # ... arayüz tanımı ...
     css="""
         #voicy-logo {
             max-height: 81px;
