@@ -79,8 +79,7 @@ with gr.Blocks(
 
         /* Sağ hizalama + 20px içeri kaydırma */
       .right-align {
-        text-align: right;
-        margin-left: 20px;
+        margin-left: 9px;
       }
       footer { display: none !important; }
     """
@@ -97,7 +96,8 @@ with gr.Blocks(
     gr.Markdown(
         i18n(
             "[GitHub](https://github.com/ahm3texe/RVC_v2)"
-        )
+        ),
+        elem_classes=["right-align"]
     )
     with gr.Tab(i18n("Klonlama Arayüzü")):
         inference_tab()
