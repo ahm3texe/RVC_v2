@@ -67,21 +67,7 @@ theme = gr.themes.Citrus(
 with gr.Blocks(
     theme=theme,  # Use the Citrus theme here
     title="Voicy",
-    css="""
-        #voicy-logo {
-            max-height: 81px;
-            margin-left: -25px;
-            margin-top: 10px;
-            display: block;
-        }
-        .logo-container {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            height: 80px;
-        }
-        footer {display:none !important}
-    """
+
 ) as Applio:
     with gr.Row():
         gr.HTML(
