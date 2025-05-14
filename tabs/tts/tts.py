@@ -297,6 +297,7 @@ def tts_tab():
             label=i18n("Çıktı Bilgisi"),
             info=i18n("Çıktı bilgisi burada gösterilecektir."),
         )
+        vc_output3 = gr.Audio(label=i18n("Ham TTS Sesi (EdgeTTS)"))
         vc_output2 = gr.Audio(label=i18n("Oluşturulan Ses"))
 
     def toggle_visible(checkbox):
@@ -369,5 +370,5 @@ def tts_tab():
             embedder_model_custom,
             sid,
         ],
-        outputs=[vc_output1, vc_output2],
+        outputs=[vc_output1, vc_output3, vc_output2],
     )
