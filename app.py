@@ -66,6 +66,7 @@ theme = gr.themes.Citrus(
 # Define Gradio interface with the Citrus theme
 with gr.Blocks(
     theme=theme,  # Use the Citrus theme here
+    dark_theme=theme,
     title="Voicy",
     css="""
         #voicy-logo {
