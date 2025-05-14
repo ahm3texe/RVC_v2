@@ -63,11 +63,28 @@ theme = gr.themes.Citrus(
     radius_size=gr.themes.Size(lg="24px", md="15px", sm="20px", xl="28px", xs="8px", xxl="25px", xxs="6px"),
 )
 
-# Define Gradio interface with the Citrus theme
+js_func = """
+function refresh() {
+    const url = new URL(window.location);
+    // Eğer zaten dark değilse, parametreyi ekle ve sayfayı yenile
+    if (url.searchParams.get('__theme') !== 'dark') {
+        url.searchParams.set('__theme', 'dark');
+        window.location.href = url.href;
+    }
+}
+// Fonksiyonu hemen çağır
+refresh();
+"""
+
 with gr.Blocks(
-    theme=theme,  # Use the Citrus theme here
-    dark_theme=theme,
+    js=js_func,
+    theme=theme,         # sizin Citrus tema tanımınız
     title="Voicy",
+    css="""
+        /* ...mevcut CSS’iniz... */
+    """
+) as Applio:
+    # ... arayüz tanımı ...
     css="""
         #voicy-logo {
             max-height: 81px;
