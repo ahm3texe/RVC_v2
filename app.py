@@ -55,14 +55,7 @@ theme = gr.themes.Citrus(
     primary_hue="red",
     secondary_hue="red",
     neutral_hue="gray",
-    radius_size="md",
-).set(
-    block_border_radius="14px",
-    block_border_radius_dark="14px",
-    button_primary_border_radius="10px",
-    button_primary_border_radius_dark="10px",
-    input_border_radius="8px",
-    input_border_radius_dark="8px",
+    radius_size=gr.themes.Size(lg="24px", md="15px", sm="20px", xl="28px", xs="8px", xxl="25px", xxs="6px"),
 )
 
 # Gradio arayüzünü Citrus temasıyla tanımlayın
