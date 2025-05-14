@@ -406,7 +406,7 @@ def train_tab():
                 )
         refresh = gr.Button(i18n("Yenile"))
 
-        with gr.Accordion(i18n("Advanced Settings"), open=False):
+        with gr.Accordion(i18n("Ekstra Ayarlar"), open=False):
             cut_preprocess = gr.Radio(
                 label=i18n("Ses Kesme"),
                 info=i18n(
@@ -440,7 +440,7 @@ def train_tab():
 
             with gr.Row():
                 process_effects = gr.Checkbox(
-                    label=i18n("Process effects"),
+                    label=i18n("İşlem efektleri"),
                     info=i18n(
                         "Veri kümeniz zaten işlenmişse bu seçeneğin devre dışı bırakılması önerilir."
                     ),
@@ -496,7 +496,7 @@ def train_tab():
             )
 
     # Extract section
-    with gr.Accordion(i18n("Extract")):
+    with gr.Accordion(i18n("Çıkarım")):
         with gr.Row():
             f0_method = gr.Radio(
                 label=i18n("Pitch çıkartma algoritması"),
@@ -590,7 +590,7 @@ def train_tab():
         )
 
     # Training section
-    with gr.Accordion(i18n("Training")):
+    with gr.Accordion(i18n("Eğitim")):
         with gr.Row():
             batch_size = gr.Slider(
                 1,
@@ -627,71 +627,71 @@ def train_tab():
             with gr.Row():
                 with gr.Column():
                     save_only_latest = gr.Checkbox(
-                        label=i18n("Save Only Latest"),
+                        label=i18n("Yalnızca Sonuncuyu Kaydet"),
                         info=i18n(
-                            "Enabling this setting will result in the G and D files saving only their most recent versions, effectively conserving storage space."
+                            "Bu ayarın etkinleştirilmesi, G ve D dosyalarının yalnızca en son sürümlerinin kaydedilmesini sağlar ve böylece depolama alanından tasarruf edilir."
                         ),
                         value=True,
                         interactive=True,
                     )
                     save_every_weights = gr.Checkbox(
-                        label=i18n("Save Every Weights"),
-                        info=i18n(
-                            "This setting enables you to save the weights of the model at the conclusion of each epoch."
-                        ),
-                        value=True,
-                        interactive=True,
-                    )
-                    pretrained = gr.Checkbox(
-                        label=i18n("Pretrained"),
-                        info=i18n(
-                            "Utilize pretrained models when training your own. This approach reduces training duration and enhances overall quality."
-                        ),
-                        value=True,
-                        interactive=True,
-                    )
-                with gr.Column():
-                    cleanup = gr.Checkbox(
-                        label=i18n("Fresh Training"),
-                        info=i18n(
-                            "Enable this setting only if you are training a new model from scratch or restarting the training. Deletes all previously generated weights and tensorboard logs."
-                        ),
-                        value=False,
-                        interactive=True,
-                    )
-                    cache_dataset_in_gpu = gr.Checkbox(
-                        label=i18n("Cache Dataset in GPU"),
-                        info=i18n(
-                            "Cache the dataset in GPU memory to speed up the training process."
-                        ),
-                        value=False,
-                        interactive=True,
-                    )
-                    checkpointing = gr.Checkbox(
-                        label=i18n("Checkpointing"),
-                        info=i18n(
-                            "Enables memory-efficient training. This reduces VRAM usage at the cost of slower training speed. It is useful for GPUs with limited memory (e.g., <6GB VRAM) or when training with a batch size larger than what your GPU can normally accommodate."
-                        ),
-                        value=False,
-                        interactive=True,
-                    )
-            with gr.Row():
-                custom_pretrained = gr.Checkbox(
-                    label=i18n("Custom Pretrained"),
+                    label=i18n("Her Ağırlığı Kaydet"),
                     info=i18n(
-                        "Utilizing custom pretrained models can lead to superior results, as selecting the most suitable pretrained models tailored to the specific use case can significantly enhance performance."
+                        "Bu ayar, her epoch sonunda modelin ağırlıklarının kaydedilmesini sağlar."
+                    ),
+                    value=True,
+                    interactive=True,
+                )
+                pretrained = gr.Checkbox(
+                    label=i18n("Önceden Eğitilmiş"),
+                    info=i18n(
+                        "Kendi modelinizi eğitirken önceden eğitilmiş modelleri kullanın. Bu yaklaşım, eğitim süresini kısaltır ve genel kaliteyi artırır."
+                    ),
+                    value=True,
+                    interactive=True,
+                )
+            with gr.Column():
+                cleanup = gr.Checkbox(
+                    label=i18n("Yeni Eğitim"),
+                    info=i18n(
+                        "Bu ayarı yalnızca yeni bir model sıfırdan eğitiliyorsa veya eğitimi yeniden başlatıyorsanız etkinleştirin. Önceki tüm oluşturulmuş ağırlıkları ve tensorboard günlüklerini siler."
                     ),
                     value=False,
                     interactive=True,
                 )
-                overtraining_detector = gr.Checkbox(
-                    label=i18n("Overtraining Detector"),
+                cache_dataset_in_gpu = gr.Checkbox(
+                    label=i18n("Veri Setini GPU'da Önbelleğe Al"),
                     info=i18n(
-                        "Detect overtraining to prevent the model from learning the training data too well and losing the ability to generalize to new data."
+                        "Veri setini GPU belleğinde önbelleğe alarak eğitim sürecini hızlandırır."
                     ),
                     value=False,
                     interactive=True,
                 )
+                checkpointing = gr.Checkbox(
+                    label=i18n("Kontrol Noktası"),
+                    info=i18n(
+                        "Bellek tasarruflu eğitimi etkinleştirir. Bu, VRAM kullanımını azaltır ancak eğitim hızını düşürür. Sınırlı belleğe sahip GPU'lar (örneğin, <6GB VRAM) veya normalden daha büyük bir toplu iş boyutuyla eğitim yaparken kullanışlıdır."
+                    ),
+                    value=False,
+                    interactive=True,
+                )
+        with gr.Row():
+            custom_pretrained = gr.Checkbox(
+                label=i18n("Özel Önceden Eğitilmiş"),
+                info=i18n(
+                    "Özel önceden eğitilmiş modeller kullanmak, özellikle kullanım durumuna en uygun önceden eğitilmiş modeller seçildiğinde, üstün sonuçlar elde edilmesini sağlayabilir."
+                ),
+                value=False,
+                interactive=True,
+            )
+            overtraining_detector = gr.Checkbox(
+                label=i18n("Aşırı Eğitim Dedektörü"),
+                info=i18n(
+                    "Modelin eğitim verilerini aşırı öğrenmesini ve yeni verilere genelleme yeteneğini kaybetmesini önlemek için aşırı eğitimi tespit eder."
+                ),
+                value=False,
+                interactive=True,
+            )
             with gr.Row():
                 with gr.Column(visible=False) as pretrained_custom_settings:
                     with gr.Accordion(i18n("Pretrained Custom Settings")):
