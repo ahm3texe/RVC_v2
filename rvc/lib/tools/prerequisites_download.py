@@ -137,7 +137,7 @@ def prequisites_download_pipeline(
 
     if total_size > 0:
         with tqdm(
-            total=total_size, unit="iB", unit_scale=True, desc="Downloading all files"
+            total=total_size, unit="iB", unit_scale=True, desc="Tüm dosyalar indiriliyor"
         ) as global_bar:
             if models:
                 download_mapping_files(models_list, global_bar)
@@ -146,7 +146,7 @@ def prequisites_download_pipeline(
                 if os.name == "nt":
                     download_mapping_files(executables_list, global_bar)
                 else:
-                    print("No executables needed")
+                    print("")
             if pretraineds_hifigan:
                 download_mapping_files(pretraineds_hifigan_list, global_bar)
     else:
